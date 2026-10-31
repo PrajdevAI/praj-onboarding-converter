@@ -491,3 +491,22 @@ class GoldenBuilder:
         for name, cols in GOLDEN_COLUMNS.items():
             sheets[name] = sheets[name].reindex(columns=cols)
         return sheets
+
+    def build_sales_only(self) -> dict:
+        """Sales-only subset for weekly top-ups.
+
+        Builds just the sales sheets (Products, Daily_Sales, Sales_Item_Detail) — no
+        payroll / purchases / fixed-bills / cash-out. Two reasons: (1) a POS-only week has
+        no accounting/payroll entities, so the full build() would crash; (2) feeding only
+        sales sheets to PRAJ_IQ's weekly ingest means a weekly upload can never overwrite
+        the store's accounting rows. The onboarding path (build()) is untouched."""
+        ln = self.sales_lines_with_mods()
+        sheets = {
+            "Products": self.products(ln),
+            "Daily_Sales": self.daily_sales(ln),
+            "Sales_Item_Detail": self.sales_item_detail(ln),
+        }
+        for name, df in list(sheets.items()):
+            if name in GOLDEN_COLUMNS:
+                sheets[name] = df.reindex(columns=GOLDEN_COLUMNS[name])
+        return sheets

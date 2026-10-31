@@ -107,10 +107,14 @@ async def convert(
     start: str = Form("2025-10-01", description="period start, YYYY-MM-DD"),
     end: str = Form("2026-09-30", description="period end, YYYY-MM-DD"),
     profile: str = Form("restaurant"),
+    mode: str = Form("full", description="'full' (onboarding, all sheets) or 'weekly' (sales-only top-up)"),
     download: bool = Query(False, description="true -> stream the .xlsx; false -> JSON with base64 workbook"),
 ):
     """
     Transform the bundle into the Golden workbook.
+
+    mode='full' (default): the complete Golden workbook (onboarding).
+    mode='weekly'        : sales-only workbook for a weekly top-up (no accounting/payroll).
 
     download=false (default): JSON { status, reconciliation, ingest_summary, workbook_base64, ... }
     download=true          : the .xlsx bytes, with the verdict in X-Reconciliation-Status header.
@@ -123,7 +127,8 @@ async def convert(
             raise HTTPException(status_code=400, detail="No CSV/XLSX data files found in the upload.")
         t0 = time.perf_counter()
         try:
-            result = core.convert_bundle(root, workdir, business=business, start=start, end=end, profile=profile)
+            result = core.convert_bundle(root, workdir, business=business, start=start, end=end,
+                                         profile=profile, mode=mode)
         except Exception as exc:  # noqa: BLE001 - surface engine errors to the caller
             logger.exception("rid=%s convert FAILED business=%r files=%d: %s", rid, business, len(saved), exc)
             raise HTTPException(status_code=422, detail=f"Conversion failed: {exc}") from exc

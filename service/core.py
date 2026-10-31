@@ -33,7 +33,7 @@ if ROOT not in sys.path:
 from engine.ingest import classify, ingest_folders, load_mappings      # noqa: E402
 from engine.golden_builder import GoldenBuilder, load_profile          # noqa: E402
 from engine.golden_writer import write_golden                          # noqa: E402
-from engine.reconcile import run_checks, column_completeness           # noqa: E402
+from engine.reconcile import run_checks, run_sales_checks, column_completeness   # noqa: E402
 
 
 # --------------------------------------------------------------------------- #
@@ -248,29 +248,50 @@ class ConvertResult:
 
 
 def convert_bundle(upload_root: str, workdir: str, *, business: str, start: str, end: str,
-                   profile: str = "restaurant") -> ConvertResult:
-    """Mirror of engine/convert.py's main pipeline, returning structured results."""
+                   profile: str = "restaurant", mode: str = "full") -> ConvertResult:
+    """Convert a raw bundle to Golden and reconcile it.
+
+    mode="full"   : onboarding — the complete Golden workbook (all sheets, formulas,
+                    dashboard) reconciled against every raw file. Unchanged.
+    mode="weekly" : a weekly top-up — SALES sheets only (Products, Daily_Sales,
+                    Sales_Item_Detail) written as a plain workbook, reconciled with the
+                    sales-only checks. Works on a POS-only week (no accounting needed) and,
+                    because it carries no cash/accounting/payroll sheets, can never
+                    overwrite the store's accounting when fed to the weekly ingest.
+    """
     start_d, end_d = date.fromisoformat(start), date.fromisoformat(end)
 
     res = ingest_folders([upload_root], load_mappings(), verbose=False)
 
     profile_obj = load_profile(profile)
     gb = GoldenBuilder(res.entities, profile_obj, start_d, end_d, business)
-    sheets = gb.build()
-    ents = dict(res.entities)
-    ents["payment"] = gb.ent("payment")
 
-    checks = run_checks(sheets, ents, profile_obj, start_d, end_d)
-    hard_fail = int((~checks["pass"] & (checks.severity == "hard")).sum())
-
-    # write the workbook to the work dir, then read bytes back (write_golden is path-based)
     tag_pos = [s for s in res.source_systems if s not in ("quickbooks_online", "gusto", "doordash")]
     tag = ("_" + "_".join(tag_pos)) if tag_pos else ""
-    fname = f"{business.lower().replace(' ', '_')}{tag}_golden.xlsx"
-    out_path = os.path.join(workdir, fname)
-    sources = sorted({f"{s}:{d}" for s, d in zip(res.batches.source_system.dropna(),
-                                                 res.batches.document_type.dropna())})
-    write_golden(out_path, sheets, business, start_d, end_d, sources, gb.notes)
+
+    if mode == "weekly":
+        sheets = gb.build_sales_only()
+        ents = dict(res.entities)
+        checks = run_sales_checks(sheets, ents, start_d, end_d)
+        hard_fail = int((~checks["pass"] & (checks.severity == "hard")).sum())
+        fname = f"{business.lower().replace(' ', '_')}{tag}_weekly_{start}_{end}.xlsx"
+        out_path = os.path.join(workdir, fname)
+        # plain data workbook — no formulas/dashboard needed for ingest
+        with pd.ExcelWriter(out_path, engine="openpyxl") as xw:
+            for name, df in sheets.items():
+                df.to_excel(xw, sheet_name=name, index=False)
+    else:
+        sheets = gb.build()
+        ents = dict(res.entities)
+        ents["payment"] = gb.ent("payment")
+        checks = run_checks(sheets, ents, profile_obj, start_d, end_d)
+        hard_fail = int((~checks["pass"] & (checks.severity == "hard")).sum())
+        fname = f"{business.lower().replace(' ', '_')}{tag}_golden.xlsx"
+        out_path = os.path.join(workdir, fname)
+        sources = sorted({f"{s}:{d}" for s, d in zip(res.batches.source_system.dropna(),
+                                                     res.batches.document_type.dropna())})
+        write_golden(out_path, sheets, business, start_d, end_d, sources, gb.notes)
+
     with open(out_path, "rb") as fh:
         wb_bytes = fh.read()
 

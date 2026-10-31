@@ -113,6 +113,55 @@ def run_checks(sheets: dict, entities: dict, profile: dict, start=None, end=None
     return pd.DataFrame(checks)
 
 
+def run_sales_checks(sheets: dict, entities: dict, start=None, end=None) -> pd.DataFrame:
+    """Weekly top-up reconciliation: SALES DATA integrity only.
+
+    A weekly POS upload carries no payout/accounting/payroll files, so settlement-timing
+    checks (card payouts, DoorDash, bill payments) are out of scope here — they're deferred
+    to the monthly accounting upload and surfaced as 'pending', never a hard failure. What
+    we DO verify is that the sales numbers tie out (item+modifier rows, order headers, order
+    and line counts, per-day net, and the internal sales identities). A failure here is a
+    real data mismatch and should quarantine the batch."""
+    checks = []
+
+    def add(name, expected, actual, tol=0.05, hard=True, detail=""):
+        ok = _close(expected, actual, tol)
+        checks.append({"check": name, "expected (raw files)": round(float(expected), 2), "actual (golden)": round(float(actual), 2),
+                       "difference": round(float(actual) - float(expected), 2), "pass": ok, "severity": "hard" if hard else "soft", "detail": detail})
+
+    ln = entities["sales_line"]
+    md = entities.get("sales_line_modifier", pd.DataFrame(columns=["net", "gross", "void", "business_date"])).copy()
+    oh = entities.get("order_header", pd.DataFrame())
+    if len(md):
+        md["void"] = md["void"].astype(bool)
+        if "included_in_parent" in md.columns:
+            inc = md["included_in_parent"].fillna(False).astype(bool)
+            md.loc[inc, ["net", "gross"]] = 0.0
+    ds = sheets["Daily_Sales"]; sid = sheets["Sales_Item_Detail"]
+
+    raw_net = ln[~ln.void].net.sum() + md[~md.void].net.sum()
+    raw_gross = ln[~ln.void].gross.sum() + md[~md.void].gross.sum()
+    raw_tax = ln[~ln.void].tax.sum()
+    add("Net sales: POS item+modifier rows (non-void) = Daily_Sales.Net Sales", raw_net, ds["Net Sales"].sum())
+    add("Net sales: Daily_Sales = Sales_Item_Detail", ds["Net Sales"].sum(), sid["Net Sales"].sum())
+    add("Gross sales: POS = Daily_Sales.Gross Sales", raw_gross, ds["Gross Sales"].sum())
+    add("Sales tax: POS item tax = Daily_Sales.Sales Tax", raw_tax, ds["Sales Tax"].sum())
+    add("Lines: POS non-void item rows = Sales_Item_Detail rows", (~ln.void).sum(), len(sid), tol=0)
+    if len(oh):
+        add("Net sales: POS order headers net (non-voided) = Daily_Sales.Net Sales", oh[~oh.voided].net_sales.sum(), ds["Net Sales"].sum(), tol=1.0,
+            detail="order header vs line level; rounding across modifiers")
+        add("Orders: POS order headers (non-voided) = Daily_Sales.Orders", oh[~oh.voided].order_id.nunique(), ds["Orders"].sum(), tol=0)
+    day_raw = (ln[~ln.void].groupby("business_date").net.sum().add(md[~md.void].groupby("business_date").net.sum(), fill_value=0))
+    day_gold = ds.set_index(ds["Date"].dt.date)["Net Sales"]
+    bad_days = int(((day_raw - day_gold.reindex(day_raw.index).fillna(0)).abs() > 0.05).sum())
+    add("Per-day net sales mismatches (count of days)", 0, bad_days, tol=0)
+
+    # internal sales identities (no accounting/cash involved)
+    add("Identity: Daily_Sales Gross - Discounts = Net", (ds["Gross Sales"] - ds["Discounts"]).sum(), ds["Net Sales"].sum())
+    add("Identity: Sales_Item_Detail Net - COGS = Gross Profit", (sid["Net Sales"] - sid["COGS"]).sum(), sid["Gross Profit"].sum())
+    return pd.DataFrame(checks)
+
+
 FORMULA_COLUMNS = {("Products", "Gross Margin %")}      # written as Excel formulas by the writer
 
 
