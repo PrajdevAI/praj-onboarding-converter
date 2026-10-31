@@ -1,0 +1,122 @@
+# Provider mapping pack: SpotOn Restaurant POS exports
+# Layout RECONSTRUCTED from SpotOn's Restaurant POS Export API object names (Orders, Order Items, Payments,
+# Order Types, Payment Options); the CSV columns are not public.  Specifics: ISO-8601 timestamps with UTC offset,
+# upper-case enum order types, modifiers as "Name (+x.xx); Name".
+source_system: spoton
+layout_status: reconstructed
+documents:
+
+  - document_type: orders
+    entity: order_header
+    detect:
+      filename: "^SpotOn_Orders_.*\\.csv$"
+      required_headers: ["Order Id", "Opened At", "Order Type", "Guest Count", "Surcharges"]
+    columns:
+      order_id: "Order Id"
+      check_id: "Order Id"
+      order_num: "Order Number"
+      opened_at: "Opened At"
+      closed_at: "Closed At"
+      dining_option: "Order Type"
+      order_source: "Source"
+      server: "Server"
+      guests: "Guest Count"
+      customer_id: "Customer Id"
+      discount_reason: "Discount Names"
+      discount_total: "Discounts"
+      net_sales: "Net Sales"
+      gratuity: "Surcharges"
+      tax: "Tax"
+      tip: "Tip"
+      total: "Total"
+      voided: "Status"
+    value_maps:
+      dining_option: {"DINE_IN": "Dine In", "TAKE_OUT": "Take Out", "THIRD_PARTY_DELIVERY": "Delivery", "DELIVERY": "Delivery", "CATERING": "Catering"}
+      voided: {"VOIDED": "true", "CLOSED": "false", "OPEN": "false"}
+    types: {opened_at: datetime_iso, closed_at: datetime_iso, guests: number, discount_total: money, net_sales: money, gratuity: money,
+            tax: money, tip: money, total: money, voided: bool}
+    rules:
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: order_items
+    entity: sales_line
+    detect:
+      filename: "^SpotOn_OrderItems_.*\\.csv$"
+      required_headers: ["Order Item Id", "Order Id", "Menu Item", "Report Category", "Modifiers", "Voided"]
+    columns:
+      line_id: "Order Item Id"
+      order_id: "Order Id"
+      check_id: "Order Id"
+      sent_at: "Sent At"
+      item_source_id: "Menu Item Id"
+      item_name: "Menu Item"
+      category: "Report Category"
+      sku: "SKU"
+      quantity: "Quantity"
+      unit_price: "Base Price"
+      modifiers_text: "Modifiers"
+      gross: "Gross"
+      discount: "Discount"
+      net: "Net"
+      tax: "Tax"
+      void: "Voided"
+      dining_option: "Order Type"
+    value_maps:
+      dining_option: {"DINE_IN": "Dine In", "TAKE_OUT": "Take Out", "THIRD_PARTY_DELIVERY": "Delivery", "DELIVERY": "Delivery", "CATERING": "Catering"}
+    types: {sent_at: datetime_iso, quantity: number, unit_price: money, gross: money, discount: money, net: money, tax: money, void: bool}
+    rules:
+      - copy: {from: sent_at, to: opened_at}
+      - business_date: {from: opened_at, closeout: "04:00"}
+      - split_modifiers: {from: modifiers_text, delimiter: "; ", price_pattern: "\\(\\+([0-9]+\\.[0-9]{2})\\)"}
+
+  - document_type: payments
+    entity: payment
+    detect:
+      filename: "^SpotOn_Payments_.*\\.csv$"
+      required_headers: ["Payment Id", "Order Id", "Payment Option", "Refund Amount"]
+    columns:
+      payment_id: "Payment Id"
+      order_id: "Order Id"
+      check_id: "Order Id"
+      paid_at: "Paid At"
+      tender_type: "Payment Option"
+      card_type: "Card Brand"
+      amount: "Amount"
+      tip: "Tip"
+      gratuity: "Surcharge"
+      total: "Total"
+      status: "Status"
+      refund_amount: "Refund Amount"
+      refund_at: "Refunded At"
+    value_maps:
+      tender_type: {"CREDIT": "Credit", "DEBIT": "Credit", "CASH": "Cash", "GIFT_CARD": "Gift Card", "THIRD_PARTY": "Other", "HOUSE_ACCOUNT": "Other"}
+    constants:
+      other_type: ""
+    types: {paid_at: datetime_iso, refund_at: datetime_iso, amount: money, tip: money, gratuity: money, total: money, refund_amount: money}
+    rules:
+      - copy: {from: paid_at, to: opened_at}
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: deposits
+    entity: settlement_card
+    detect:
+      filename: "^SpotOn_Deposits_.*\\.csv$"
+      required_headers: ["Deposit Id", "Deposit Date", "Net Deposit"]
+    columns:
+      business_date: "Business Date"
+      payout_date: "Deposit Date"
+      payout_id: "Deposit Id"
+      card_sales: "Card Sales"
+      tips: "Tips"
+      refunds: "Refunds"
+      fees: "Processing Fees"
+      net_deposit: "Net Deposit"
+    types: {business_date: date_iso, payout_date: date_iso, card_sales: money, tips: money, refunds: money, fees: money, net_deposit: money}
+
+  - document_type: guest_feedback
+    entity: feedback
+    detect:
+      filename: "^SpotOn_GuestFeedback_.*\\.csv$"
+      required_headers: ["Order Id", "Rating"]
+    columns: {order_id: "Order Id", rating: "Rating", business_date: "Business Date"}
+    types: {rating: number, business_date: date_iso}

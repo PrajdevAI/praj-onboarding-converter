@@ -1,0 +1,49 @@
+# Provider mapping pack: QuickBooks Online report exports (Excel)
+source_system: quickbooks_online
+documents:
+
+  - document_type: bills_transaction_detail
+    entity: purchase_line
+    detect:
+      filename: "QBO_Bills.*\\.xlsx$"
+      required_headers: ["Transaction Type", "Num", "Name", "Account", "Rate", "Amount", "Due Date"]
+    read: {format: xlsx}
+    filters:
+      - {column: "Transaction Type", equals: "Bill"}
+    columns:
+      invoice_date: "Date"
+      invoice_id: "Num"
+      vendor: "Name"
+      description: "Memo/Description"
+      account: "Account"
+      quantity: "Qty"
+      unit: "Unit"
+      unit_cost: "Rate"
+      line_total: "Amount"
+      due_date: "Due Date"
+      terms: "Terms"
+      open_balance: "Open Balance"
+      paid_status: "A/P Paid"
+    types: {invoice_date: date_us, due_date: date_us, quantity: number, unit_cost: money, line_total: money, open_balance: money}
+    rules:
+      - regex_extract: {from: terms, to: terms_days, pattern: "(\\d+)", as: number}
+
+  - document_type: transaction_list
+    entity: accounting_txn
+    detect:
+      filename: "QBO_TransactionList.*\\.xlsx$"
+      required_headers: ["Transaction Type", "Num", "Name", "Account", "Split", "Amount"]
+    read: {format: xlsx}
+    columns:
+      txn_date: "Date"
+      txn_type: "Transaction Type"
+      reference: "Num"
+      payee: "Name"
+      memo: "Memo/Description"
+      account: "Account"
+      split: "Split"
+      payment_method: "Payment Method"
+      amount: "Amount"
+      qbo_class: "Class"
+      due_date: "Due Date"
+    types: {txn_date: date_us, due_date: date_us, amount: money}

@@ -1,0 +1,134 @@
+# Provider mapping pack: Clover dashboard exports
+# Layout RECONSTRUCTED from Clover's REST API field names (orders, lineItems, modifications, payments,
+# voided_line_items).  Clover does not publish its dashboard CSV columns; confirm against a real export.
+# Clover specifics handled here: merchant-defined Order Type strings, modifiers packed as "Name:price; Name:price",
+# voided items in a separate file, "Created Time (ms)" epoch timestamps.
+source_system: clover
+layout_status: reconstructed
+documents:
+
+  - document_type: orders
+    entity: order_header
+    detect:
+      filename: "^Clover_Orders_.*\\.csv$"
+      required_headers: ["Order ID", "Order Type", "Payment State", "Created Time (ms)"]
+    columns:
+      order_id: "Order ID"
+      check_id: "Order ID"
+      order_num: "Order Number"
+      opened_at: "Created Time"
+      closed_at: "Modified Time"
+      dining_option: "Order Type"
+      server: "Employee"
+      customer_id: "Customer ID"
+      state: "State"
+      gross_sales: "Subtotal"
+      discount_total: "Discount Amount"
+      discount_reason: "Discount Name"
+      tax: "Tax"
+      gratuity: "Service Charge"
+      tip: "Tip"
+      total: "Total"
+      guests: "Guests"
+      voided: "State"
+    value_maps:
+      dining_option: {"Dine In": "Dine In", "To Go": "Take Out", "DoorDash": "Delivery", "Uber Eats": "Delivery", "Catering": "Catering"}
+      voided: {"voided": "true", "locked": "false", "open": "false"}
+    types: {opened_at: datetime_iso, closed_at: datetime_iso, gross_sales: money, discount_total: money, tax: money, gratuity: money,
+            tip: money, total: money, guests: number, voided: bool}
+    rules:
+      - expression: {to: net_sales, expr: "gross_sales - discount_total"}
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: line_items
+    entity: sales_line
+    detect:
+      filename: "^Clover_LineItems_.*\\.csv$"
+      required_headers: ["Line Item ID", "Order ID", "Item Name", "Modifiers", "Modifier Amount", "Is Revenue"]
+    columns:
+      line_id: "Line Item ID"
+      order_id: "Order ID"
+      check_id: "Order ID"
+      sent_at: "Created Time"
+      item_source_id: "Item ID"
+      item_name: "Item Name"
+      category: "Category"
+      sku: "SKU"
+      quantity: "Quantity"
+      unit_price: "Unit Price"
+      modifiers_text: "Modifiers"
+      gross: "Price"
+      discount: "Discount Amount"
+      tax: "Tax Amount"
+      server: "Employee"
+    constants:
+      void: false                               # voided items live in Clover_VoidedLineItems
+    types: {sent_at: datetime_iso, quantity: number, unit_price: money, gross: money, discount: money, tax: money}
+    rules:
+      - copy: {from: sent_at, to: opened_at}
+      - expression: {to: net, expr: "gross - discount"}
+      - business_date: {from: opened_at, closeout: "04:00"}
+      - split_modifiers: {from: modifiers_text, delimiter: "; ", price_pattern: ":([0-9]+\\.[0-9]{2})$"}
+
+  - document_type: voided_line_items
+    entity: voided_line
+    detect:
+      filename: "^Clover_VoidedLineItems_.*\\.csv$"
+      required_headers: ["Line Item ID", "Reason", "Delete Type", "Deleted Time"]
+    columns: {line_id: "Line Item ID", order_id: "Order ID", item_name: "Item Name", quantity: "Quantity", gross: "Price", reason: "Reason", deleted_at: "Deleted Time"}
+    types: {quantity: number, gross: money, deleted_at: datetime_iso}
+
+  - document_type: payments
+    entity: payment
+    detect:
+      filename: "^Clover_Payments_.*\\.csv$"
+      required_headers: ["Payment ID", "Order ID", "Tender", "Result", "Refund Amount"]
+    columns:
+      payment_id: "Payment ID"
+      order_id: "Order ID"
+      check_id: "Order ID"
+      paid_at: "Created Time"
+      tender_type: "Tender"
+      card_type: "Card Type"
+      amount: "Amount"
+      tip: "Tip Amount"
+      tax: "Tax Amount"
+      total: "Total"
+      status: "Result"
+      refund_amount: "Refund Amount"
+      refund_at: "Refund Time"
+    value_maps:
+      tender_type: {"Credit Card": "Credit", "Debit Card": "Credit", "Cash": "Cash", "Gift Card": "Gift Card", "External - DoorDash": "Other", "External - Uber Eats": "Other"}
+      status: {"SUCCESS": "CAPTURED", "VOIDED": "VOIDED", "FAILED": "VOIDED"}
+    constants:
+      other_type: ""
+      gratuity: 0.0
+    types: {paid_at: datetime_iso, refund_at: datetime_iso, amount: money, tip: money, tax: money, total: money, refund_amount: money}
+    rules:
+      - copy: {from: paid_at, to: opened_at}
+      - business_date: {from: opened_at, closeout: "04:00"}
+    # NB: Clover's payment Amount is the total charged (incl. tax, excl. tip) - same meaning as Toast's Amount.
+
+  - document_type: deposits
+    entity: settlement_card
+    detect:
+      filename: "^Clover_Deposits_.*\\.csv$"
+      required_headers: ["Batch ID", "Deposit Date", "Net Deposit"]
+    columns:
+      business_date: "Batch Date"
+      payout_date: "Deposit Date"
+      payout_id: "Batch ID"
+      card_sales: "Gross Sales"
+      tips: "Tips"
+      refunds: "Refunds"
+      fees: "Processing Fees"
+      net_deposit: "Net Deposit"
+    types: {business_date: date_iso, payout_date: date_iso, card_sales: money, tips: money, refunds: money, fees: money, net_deposit: money}
+
+  - document_type: guest_feedback
+    entity: feedback
+    detect:
+      filename: "^Clover_GuestFeedback_.*\\.csv$"
+      required_headers: ["Order ID", "Rating"]
+    columns: {order_id: "Order ID", rating: "Rating", business_date: "Business Date"}
+    types: {rating: number, business_date: date_iso}

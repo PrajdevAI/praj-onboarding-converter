@@ -1,0 +1,168 @@
+# Provider mapping pack: Square (Square for Restaurants / Square POS) dashboard exports
+# Layout: Transactions CSV and Items Detail CSV headers as posted by Square sellers (sellercommunity.com, 2025).
+# Square flattens modifiers into one "Modifiers Applied" string and keeps tips and fees only in the Transactions CSV.
+# Square has no business date: the 04:00 closeout rule derives it from Date + Time.
+source_system: square
+layout_status: documented (seller-posted headers)
+documents:
+
+  - document_type: items_detail
+    entity: sales_line
+    detect:
+      filename: "^items-.*\\.csv$"
+      required_headers: ["Item", "Qty", "Price Point Name", "Modifiers Applied", "Transaction ID", "Itemization Type"]
+    filters:
+      - {column: "Event Type", equals: "Payment"}
+    columns:
+      order_id: "Transaction ID"
+      check_id: "Transaction ID"
+      date_text: "Date"
+      time_text: "Time"
+      sku: "SKU"
+      item_name: "Item"
+      variation: "Price Point Name"
+      category: "Category"
+      quantity: "Qty"
+      gross: "Gross Sales"
+      discount: "Discounts"
+      net: "Net Sales"
+      tax: "Tax"
+      modifiers_text: "Modifiers Applied"
+      dining_option: "Dining Option"
+      server: "Employee"
+    value_maps:
+      dining_option: {"For Here": "Dine In", "To Go": "Take Out", "Delivery": "Delivery", "Catering": "Catering"}
+    constants:
+      void: false                              # Square never exports items voided before payment
+    types: {quantity: number, gross: money, discount: money, net: money, tax: money}
+    rules:
+      - combine_datetime: {date: date_text, time: time_text, to: sent_at, format: "%Y-%m-%d %H:%M:%S"}
+      - copy: {from: sent_at, to: opened_at}
+      - expression: {to: discount, expr: "abs(discount)"}       # Square shows discounts negative
+      - business_date: {from: opened_at, closeout: "04:00"}
+      - synthetic_id: {from: order_id, to: line_id}
+      - split_modifiers: {from: modifiers_text, delimiter: ", ", price_pattern: "\\(\\$([0-9]+\\.[0-9]{2})\\)"}
+
+  - document_type: transactions_payments
+    entity: payment
+    detect:
+      filename: "^transactions-.*\\.csv$"
+      required_headers: ["Transaction ID", "Total Collected", "Card", "Cash", "Event Type", "Net Sales"]
+    filters:
+      - {column: "Event Type", equals: "Payment"}
+    columns:
+      payment_id: "Payment ID"
+      order_id: "Transaction ID"
+      check_id: "Transaction ID"
+      date_text: "Date"
+      time_text: "Time"
+      dining_option: "Dining Option"
+      net_sales: "Net Sales"
+      tax: "Tax"
+      tip: "Tip"
+      gratuity: "Service Charges"
+      total: "Total Collected"
+      fees: "Fees"
+      card_type: "Card Brand"
+      other_type: "Other Tender Type"
+      card_amt: "Card"
+      cash_amt: "Cash"
+      gift_amt: "Square Gift Card"
+      other_amt: "Other Tender"
+    value_maps:
+      dining_option: {"For Here": "Dine In", "To Go": "Take Out", "Delivery": "Delivery", "Catering": "Catering"}
+    constants:
+      status: "CAPTURED"
+    types: {net_sales: money, tax: money, tip: money, gratuity: money, total: money, fees: money}
+    rules:
+      - combine_datetime: {date: date_text, time: time_text, to: paid_at, format: "%Y-%m-%d %H:%M:%S"}
+      - copy: {from: paid_at, to: opened_at}
+      - expression: {to: amount, expr: "net_sales + tax"}      # collected excluding tips and service charges
+      - expression: {to: fees, expr: "abs(fees)"}
+      - tender_from_columns: {to: tender_type, columns: {card_amt: "Credit", cash_amt: "Cash", gift_amt: "Gift Card", other_amt: "Other"}}
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: transactions_refunds
+    entity: refund
+    detect:
+      filename: "^transactions-.*\\.csv$"
+      required_headers: ["Transaction ID", "Total Collected", "Event Type", "Refund Reason"]
+    filters:
+      - {column: "Event Type", equals: "Refund"}
+    columns:
+      order_id: "Transaction ID"
+      date_text: "Date"
+      time_text: "Time"
+      amount: "Total Collected"
+      reason: "Refund Reason"
+    types: {amount: money}
+    rules:
+      - combine_datetime: {date: date_text, time: time_text, to: refund_at, format: "%Y-%m-%d %H:%M:%S"}
+      - expression: {to: amount, expr: "abs(amount)"}
+
+  - document_type: transactions_orders
+    entity: order_header
+    detect:
+      filename: "^transactions-.*\\.csv$"
+      required_headers: ["Transaction ID", "Gross Sales", "Discounts", "Source", "Dining Option", "Discount Name"]
+    filters:
+      - {column: "Event Type", equals: "Payment"}
+    columns:
+      order_id: "Transaction ID"
+      check_id: "Transaction ID"
+      date_text: "Date"
+      time_text: "Time"
+      server: "Staff Name"
+      dining_option: "Dining Option"
+      order_source: "Source"
+      discount_total: "Discounts"
+      net_sales: "Net Sales"
+      tax: "Tax"
+      tip: "Tip"
+      gratuity: "Service Charges"
+      total: "Total Collected"
+      customer_id: "Customer ID"
+      discount_reason: "Discount Name"
+    value_maps:
+      dining_option: {"For Here": "Dine In", "To Go": "Take Out", "Delivery": "Delivery", "Catering": "Catering"}
+    constants:
+      voided: false
+    types: {discount_total: money, net_sales: money, tax: money, tip: money, gratuity: money, total: money}
+    rules:
+      - combine_datetime: {date: date_text, time: time_text, to: opened_at, format: "%Y-%m-%d %H:%M:%S"}
+      - expression: {to: discount_total, expr: "abs(discount_total)"}
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: transfers
+    entity: settlement_card
+    layout_status: reconstructed
+    detect:
+      filename: "^transfers-.*\\.csv$"
+      required_headers: ["Transfer Date", "Transfer ID", "Transfer Amount"]
+    columns:
+      business_date: "Sales Date"
+      payout_date: "Transfer Date"
+      payout_id: "Transfer ID"
+      card_sales: "Collected"
+      tips: "Tips"
+      refunds: "Refunds"
+      fees: "Fees"
+      net_deposit: "Transfer Amount"
+    types: {business_date: date_iso, payout_date: date_iso, card_sales: money, tips: money, refunds: money, fees: money, net_deposit: money}
+
+  - document_type: catalog
+    entity: item_catalog
+    detect:
+      filename: "^catalog-items\\.csv$"
+      required_headers: ["Token", "Item Name", "Variation Name", "SKU", "Price"]
+    columns: {sku: "SKU", item_name: "Item Name", variation: "Variation Name", category: "Reporting Category", list_price: "Price"}
+    types: {list_price: money}
+
+  - document_type: guest_feedback
+    entity: feedback
+    layout_status: reconstructed
+    detect:
+      filename: "^Square_GuestFeedback_.*\\.csv$"
+      required_headers: ["Transaction ID", "Rating"]
+    columns: {order_id: "Transaction ID", rating: "Rating", business_date: "Business Date"}
+    types: {rating: number, business_date: date_iso}

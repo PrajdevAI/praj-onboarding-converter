@@ -1,0 +1,276 @@
+# Harbor Grill - a single-location independent full-service restaurant.
+# This spec is the single source of truth for the dummy data generators.
+# Everything in raw_uploads/ is rendered from it, so sales, purchases,
+# payroll and settlements agree with each other.
+
+business:
+  name: Harbor Grill
+  legal_name: Harbor Grill LLC
+  location_name: Harbor Grill - Westport
+  toast_location_code: "1"
+  city: Kansas City
+  state: MO
+  timezone: America/Chicago
+  business_day_closeout: "04:00"     # Toast default closeout hour
+  sales_tax_rate: 0.0825
+  period_start: 2025-10-01
+  period_end: 2026-09-30
+  seed: 20251001
+  pos: Toast
+  accounting: QuickBooks Online
+  payroll: Gusto
+
+hours:                                 # open hours by weekday (0=Mon)
+  0: ["11:00", "22:00"]
+  1: ["11:00", "22:00"]
+  2: ["11:00", "22:00"]
+  3: ["11:00", "23:00"]
+  4: ["11:00", "00:30"]
+  5: ["10:00", "00:30"]
+  6: ["10:00", "21:00"]
+
+volume:
+  base_orders_per_day: 78
+  weekday_multiplier: {0: 0.80, 1: 0.78, 2: 0.88, 3: 1.00, 4: 1.30, 5: 1.38, 6: 1.05}
+  month_multiplier: {10: 1.00, 11: 1.02, 12: 1.12, 1: 0.86, 2: 0.88, 3: 0.98, 4: 1.00, 5: 1.06, 6: 1.04, 7: 1.08, 8: 1.07, 9: 0.99}
+  channel_mix:                         # Toast dining option -> share of orders
+    "Dine In": 0.52
+    "Take Out": 0.22
+    "Delivery": 0.21                   # third-party (DoorDash) orders arriving through Toast
+    "Catering": 0.01
+  online_share_of_takeout: 0.45        # Take Out orders placed via Toast Online Ordering
+  lines_per_order: {"Dine In": 3.4, "Take Out": 2.3, "Delivery": 2.4, "Catering": 9.0}
+  guests_per_dinein_order: 2.3
+  void_rate: 0.008                     # share of item lines voided
+  refund_rate: 0.004                   # share of payments partially refunded
+  card_share: 0.82                     # of in-store/online payments; rest cash (gift card small)
+  gift_card_share: 0.03
+  tip_rate_card: 0.185
+  auto_gratuity_party_size: 6
+  auto_gratuity_rate: 0.18
+  feedback_rate: 1.0                   # dummy data: feedback captured for every order
+  loyalty_rate: 1.0                    # dummy data: loyalty id on every check
+
+menu:
+  # sku, name, category, price, unit_cost, popularity weight, diet (veg / non-veg), modifier groups
+  # 36 vegetarian items + 4 non-vegetarian items (10%)
+  - {sku: HG-APP-001, name: Crispy Cauliflower Bites,   category: Appetizers,  price: 11.00, cost: 2.60, w: 11, diet: veg}
+  - {sku: HG-APP-002, name: Spinach Artichoke Dip,      category: Appetizers,  price: 11.00, cost: 2.75, w: 10, diet: veg}
+  - {sku: HG-APP-003, name: Loaded Veggie Nachos,       category: Appetizers,  price: 12.00, cost: 2.90, w: 9,  diet: veg}
+  - {sku: HG-APP-004, name: Hummus Platter,             category: Appetizers,  price: 10.00, cost: 2.10, w: 8,  diet: veg}
+  - {sku: HG-APP-005, name: Soup of the Day,            category: Appetizers,  price: 7.00,  cost: 1.50, w: 7,  diet: veg}
+  - {sku: HG-APP-006, name: Fried Pickles,              category: Appetizers,  price: 8.00,  cost: 1.70, w: 6,  diet: veg}
+  - {sku: HG-SAL-001, name: Caesar Salad,               category: Salads,      price: 12.00, cost: 2.90, w: 9,  diet: veg, mods: [protein_addon, dressing]}
+  - {sku: HG-SAL-002, name: Chickpea Cobb Salad,        category: Salads,      price: 14.00, cost: 3.60, w: 7,  diet: veg, mods: [dressing]}
+  - {sku: HG-SAL-003, name: Garden Salad,               category: Salads,      price: 9.00,  cost: 2.00, w: 6,  diet: veg, mods: [protein_addon, dressing]}
+  - {sku: HG-SAL-004, name: Quinoa Kale Salad,          category: Salads,      price: 13.00, cost: 3.20, w: 6,  diet: veg, mods: [protein_addon, dressing]}
+  - {sku: HG-BRG-001, name: Black Bean Burger,          category: Burgers & Sandwiches, price: 15.00, cost: 3.90, w: 15, diet: veg, mods: [side_choice, burger_addon]}
+  - {sku: HG-BRG-002, name: Mushroom Swiss Veggie Burger, category: Burgers & Sandwiches, price: 16.00, cost: 4.40, w: 11, diet: veg, mods: [side_choice, burger_addon]}
+  - {sku: HG-BRG-003, name: Beyond Burger,              category: Burgers & Sandwiches, price: 17.00, cost: 5.20, w: 9,  diet: veg, mods: [side_choice, burger_addon]}
+  - {sku: HG-BRG-004, name: Falafel Wrap,               category: Burgers & Sandwiches, price: 14.00, cost: 3.40, w: 9,  diet: veg, mods: [side_choice]}
+  - {sku: HG-BRG-005, name: Caprese Panini,             category: Burgers & Sandwiches, price: 14.00, cost: 3.70, w: 7,  diet: veg, mods: [side_choice]}
+  - {sku: HG-BRG-006, name: Harbor Beef Burger,         category: Burgers & Sandwiches, price: 17.00, cost: 5.30, w: 5,  diet: non-veg, mods: [temperature, side_choice, burger_addon]}
+  - {sku: HG-ENT-001, name: Eggplant Parmesan,          category: Entrees,     price: 19.00, cost: 5.10, w: 9,  diet: veg, mods: [side_choice]}
+  - {sku: HG-ENT-002, name: Vegetable Curry Bowl,       category: Entrees,     price: 18.00, cost: 4.60, w: 10, diet: veg}
+  - {sku: HG-ENT-003, name: Mushroom Risotto,           category: Entrees,     price: 20.00, cost: 5.40, w: 8,  diet: veg}
+  - {sku: HG-ENT-004, name: Tofu Stir Fry,              category: Entrees,     price: 17.00, cost: 4.20, w: 8,  diet: veg}
+  - {sku: HG-ENT-005, name: Margherita Flatbread,       category: Entrees,     price: 16.00, cost: 3.90, w: 9,  diet: veg}
+  - {sku: HG-ENT-006, name: Veggie Tacos,               category: Entrees,     price: 16.00, cost: 3.80, w: 7,  diet: veg}
+  - {sku: HG-ENT-007, name: Grilled Salmon,             category: Entrees,     price: 26.00, cost: 9.40, w: 4,  diet: non-veg, mods: [side_choice]}
+  - {sku: HG-ENT-008, name: Herb Roasted Chicken,       category: Entrees,     price: 21.00, cost: 6.30, w: 4,  diet: non-veg, mods: [side_choice]}
+  - {sku: HG-ENT-009, name: Shrimp Tacos,               category: Entrees,     price: 18.00, cost: 5.90, w: 3,  diet: non-veg}
+  - {sku: HG-PAS-001, name: Fettuccine Alfredo,         category: Pasta,       price: 17.00, cost: 4.20, w: 9,  diet: veg, mods: [protein_addon]}
+  - {sku: HG-PAS-002, name: Penne Arrabbiata,           category: Pasta,       price: 16.00, cost: 3.60, w: 8,  diet: veg, mods: [protein_addon]}
+  - {sku: HG-PAS-003, name: Spinach Ricotta Ravioli,    category: Pasta,       price: 18.00, cost: 4.70, w: 6,  diet: veg}
+  - {sku: HG-SID-001, name: French Fries,               category: Sides,       price: 5.00,  cost: 0.95, w: 9,  diet: veg}
+  - {sku: HG-SID-002, name: Sweet Potato Fries,         category: Sides,       price: 6.00,  cost: 1.30, w: 6,  diet: veg}
+  - {sku: HG-SID-003, name: Mac and Cheese,             category: Sides,       price: 7.00,  cost: 1.70, w: 6,  diet: veg}
+  - {sku: HG-SID-004, name: Garlic Mashed Potatoes,     category: Sides,       price: 5.00,  cost: 1.00, w: 5,  diet: veg}
+  - {sku: HG-SID-005, name: Seasonal Vegetables,        category: Sides,       price: 5.00,  cost: 1.10, w: 4,  diet: veg}
+  - {sku: HG-DES-001, name: New York Cheesecake,        category: Desserts,    price: 9.00,  cost: 2.40, w: 7,  diet: veg}
+  - {sku: HG-DES-002, name: Chocolate Lava Cake,        category: Desserts,    price: 9.00,  cost: 2.20, w: 7,  diet: veg}
+  - {sku: HG-DES-003, name: Key Lime Pie,               category: Desserts,    price: 8.00,  cost: 1.90, w: 4,  diet: veg}
+  - {sku: HG-BEV-001, name: Fountain Soda,              category: Beverages,   price: 3.00,  cost: 0.35, w: 18, diet: veg}
+  - {sku: HG-BEV-002, name: Iced Tea,                   category: Beverages,   price: 3.00,  cost: 0.30, w: 11, diet: veg}
+  - {sku: HG-BEV-003, name: Fresh Lemonade,             category: Beverages,   price: 4.00,  cost: 0.60, w: 7,  diet: veg}
+  - {sku: HG-BEV-004, name: Coffee,                     category: Beverages,   price: 3.00,  cost: 0.40, w: 6,  diet: veg}
+  - {sku: HG-BAR-001, name: Draft Beer,                 category: Bar,         price: 7.00,  cost: 1.60, w: 12, diet: veg}
+  - {sku: HG-BAR-002, name: House Wine Glass,           category: Bar,         price: 10.00, cost: 2.60, w: 8,  diet: veg}
+  - {sku: HG-BAR-003, name: Classic Margarita,          category: Bar,         price: 12.00, cost: 2.90, w: 7,  diet: veg}
+  - {sku: HG-BAR-004, name: Old Fashioned,              category: Bar,         price: 13.00, cost: 3.20, w: 5,  diet: veg}
+
+price_changes:                            # mid-year menu price increase (Apr 1 2026)
+  - {effective: 2026-04-01, skus: [HG-BRG-001, HG-BRG-003, HG-ENT-001, HG-ENT-003], increase: 1.00}
+
+modifier_groups:
+  temperature:
+    name: Temperature
+    required: true
+    options:
+      - {name: Medium Rare, price: 0, cost: 0, w: 3}
+      - {name: Medium,      price: 0, cost: 0, w: 5}
+      - {name: Medium Well, price: 0, cost: 0, w: 3}
+      - {name: Well Done,   price: 0, cost: 0, w: 2}
+  side_choice:
+    name: Side Choice
+    required: true
+    options:
+      - {name: French Fries,     price: 0, cost: 0.85, w: 6}
+      - {name: Side Salad,       price: 0, cost: 0.90, w: 3}
+      - {name: Garlic Mashed,    price: 0, cost: 0.80, w: 2}
+      - {name: Seasonal Veg,     price: 0, cost: 0.90, w: 2}
+      - {name: Sub Sweet Potato Fries, price: 1.50, cost: 1.20, w: 2}
+  burger_addon:
+    name: Add-Ons
+    required: false
+    max: 2
+    attach_prob: 0.35
+    options:
+      - {name: Add Avocado,         price: 1.75, cost: 0.65, w: 5}
+      - {name: Extra Cheese,        price: 1.50, cost: 0.40, w: 4}
+      - {name: Sauteed Mushrooms,   price: 1.50, cost: 0.45, w: 3}
+      - {name: Fried Egg,           price: 1.50, cost: 0.30, w: 2}
+  protein_addon:
+    name: Add Protein
+    required: false
+    max: 1
+    attach_prob: 0.40
+    options:
+      - {name: Add Tofu,     price: 4.00, cost: 1.20, w: 5}
+      - {name: Add Paneer,   price: 4.50, cost: 1.60, w: 4}
+      - {name: Add Falafel,  price: 3.50, cost: 1.00, w: 3}
+  dressing:
+    name: Dressing
+    required: true
+    options:
+      - {name: Ranch,          price: 0, cost: 0, w: 5}
+      - {name: Balsamic,       price: 0, cost: 0, w: 3}
+      - {name: Caesar,         price: 0, cost: 0, w: 4}
+      - {name: Lemon Tahini,   price: 0, cost: 0, w: 2}
+
+promotions:
+  - {name: Burger Night 20% Off,  weekday: 1, categories: [Burgers & Sandwiches], pct: 0.20}
+  - {name: Happy Hour $2 Off,     hours: ["15:00", "18:00"], categories: [Bar], amount: 2.00, weekdays: [0,1,2,3,4]}
+  - {name: Loyalty Reward,        prob: 0.03, pct: 0.10}
+  - {name: Manager Comp,          prob: 0.004, pct: 1.00}
+
+events:                                   # owner's event calendar (local games, holidays)
+  - {date: 2025-10-31, name: Halloween, mult: 0.90}
+  - {date: 2025-11-27, name: Thanksgiving (closed), mult: 0.0}
+  - {date: 2025-11-28, name: Black Friday, mult: 1.15}
+  - {date: 2025-12-24, name: Christmas Eve, mult: 0.75}
+  - {date: 2025-12-25, name: Christmas (closed), mult: 0.0}
+  - {date: 2025-12-31, name: New Years Eve, mult: 1.40}
+  - {date: 2026-01-01, name: New Years Day, mult: 0.70}
+  - {date: 2026-02-08, name: Super Bowl Sunday, mult: 1.25}
+  - {date: 2026-02-14, name: Valentines Day, mult: 1.45}
+  - {date: 2026-03-17, name: St Patricks Day, mult: 1.20}
+  - {date: 2026-05-10, name: Mothers Day, mult: 1.50}
+  - {date: 2026-05-25, name: Memorial Day, mult: 0.85}
+  - {date: 2026-06-21, name: Fathers Day, mult: 1.30}
+  - {date: 2026-07-04, name: Independence Day, mult: 0.80}
+  - {date: 2026-09-07, name: Labor Day, mult: 0.85}
+
+employees:
+  - {id: E001, name: Daniel Okafor,    role: General Manager, pay_type: Salary, salary: 68000, benefits: 290, hire: 2023-03-01}
+  - {id: E002, name: Priya Raman,      role: Executive Chef,  pay_type: Salary, salary: 62000, benefits: 260, hire: 2022-08-15}
+  - {id: E003, name: Luis Herrera,     role: Sous Chef,       pay_type: Salary, salary: 50000, benefits: 210, hire: 2024-01-10}
+  - {id: E004, name: Marcus Lee,       role: Line Cook,       pay_type: Hourly, rate: 18.00, hours_per_week: 38, benefits: 60}
+  - {id: E005, name: Hannah Brooks,    role: Line Cook,       pay_type: Hourly, rate: 17.50, hours_per_week: 36, benefits: 60}
+  - {id: E006, name: Tomas Silva,      role: Prep Cook,       pay_type: Hourly, rate: 16.00, hours_per_week: 34, benefits: 55}
+  - {id: E007, name: Aisha Khan,       role: Server,          pay_type: Hourly, rate: 9.50,  hours_per_week: 32, benefits: 40, tipped: true}
+  - {id: E008, name: Kevin Walsh,      role: Server,          pay_type: Hourly, rate: 9.50,  hours_per_week: 30, benefits: 40, tipped: true}
+  - {id: E009, name: Sofia Martinez,   role: Server,          pay_type: Hourly, rate: 9.50,  hours_per_week: 28, benefits: 40, tipped: true}
+  - {id: E010, name: Jordan Price,     role: Bartender,       pay_type: Hourly, rate: 11.00, hours_per_week: 30, benefits: 45, tipped: true}
+  - {id: E011, name: Emily Chen,       role: Host,            pay_type: Hourly, rate: 14.00, hours_per_week: 26, benefits: 35}
+  - {id: E012, name: Andre Johnson,    role: Dishwasher,      pay_type: Hourly, rate: 15.00, hours_per_week: 34, benefits: 45}
+
+payroll:
+  first_pay_date: 2025-10-10            # biweekly Fridays; period = 14 days ending the Saturday before
+  period_lag_days: 6
+  employer_tax_rate: 0.082
+  overtime_prob_hourly: 0.18
+  bonus: {month: 12, salaried_amount: 500}
+
+vendors:
+  - {name: Sysco Kansas City,      category: Raw Materials, terms: 14, cadence_days: [0, 3], share: 0.34,
+     items: [{d: Tofu Extra Firm, unit: Case, cost: 46.00}, {d: Paneer Block, unit: Case, cost: 72.00},
+             {d: Plant-Based Burger Patties, unit: Case, cost: 94.00}, {d: Black Beans No.10 Can, unit: Case, cost: 38.00},
+             {d: Chickpeas No.10 Can, unit: Case, cost: 36.00}, {d: Arborio Rice 20lb, unit: Bag, cost: 44.00},
+             {d: Quinoa 25lb, unit: Bag, cost: 68.00}, {d: Panko Breadcrumbs, unit: Case, cost: 31.00},
+             {d: Canola Fryer Oil 35lb, unit: Each, cost: 41.50}, {d: All Purpose Flour 50lb, unit: Bag, cost: 22.90},
+             {d: Pasta Assorted 20lb, unit: Case, cost: 31.00}, {d: Brioche Buns, unit: Case, cost: 38.00},
+             {d: "Marinara Sauce No.10 Can", unit: Case, cost: 44.00}, {d: Spices and Seasoning Pack, unit: Case, cost: 58.00},
+             {d: Coconut Milk Case, unit: Case, cost: 42.00}, {d: Chicken Breast Boneless, unit: Case, cost: 96.40},
+             {d: Atlantic Salmon Fillet, unit: Case, cost: 164.00}, {d: Shrimp 16/20 Raw, unit: Case, cost: 142.00},
+             {d: Ground Beef 80/20, unit: Case, cost: 118.50}]}
+  - {name: Fresh Harvest Produce,  category: Raw Materials, terms: 7, cadence_days: [0, 2, 4], share: 0.26,
+     items: [{d: Romaine Hearts, unit: Case, cost: 34.00}, {d: Tomatoes 25lb, unit: Case, cost: 31.00},
+             {d: Yellow Onions 50lb, unit: Bag, cost: 24.00}, {d: Idaho Potatoes 50lb, unit: Bag, cost: 27.50},
+             {d: Sweet Potatoes 40lb, unit: Case, cost: 36.00}, {d: Avocados, unit: Case, cost: 52.00},
+             {d: Cauliflower 12ct, unit: Case, cost: 33.00}, {d: Eggplant 25lb, unit: Case, cost: 29.00},
+             {d: Kale 24ct, unit: Case, cost: 26.00}, {d: Bell Peppers 25lb, unit: Case, cost: 38.00},
+             {d: Lemons 140ct, unit: Case, cost: 39.00}, {d: Mushrooms 10lb, unit: Case, cost: 29.00},
+             {d: Spinach 4lb, unit: Case, cost: 21.00}, {d: Mixed Vegetables, unit: Case, cost: 33.00},
+             {d: Cilantro and Herbs, unit: Case, cost: 18.00}, {d: Limes 200ct, unit: Case, cost: 36.00},
+             {d: Fresh Basil, unit: Case, cost: 24.00}, {d: Zucchini 20lb, unit: Case, cost: 27.00}]}
+  - {name: Bluegrass Dairy,        category: Raw Materials, terms: 14, cadence_days: [1, 4], share: 0.15,
+     items: [{d: Cheddar Shredded 5lb, unit: Case, cost: 62.00}, {d: Mozzarella Shredded 5lb, unit: Case, cost: 58.00},
+             {d: Swiss Sliced, unit: Case, cost: 54.00}, {d: Heavy Cream Quart, unit: Case, cost: 41.00},
+             {d: Butter Unsalted 36lb, unit: Case, cost: 112.00}, {d: Parmesan Grated 5lb, unit: Case, cost: 71.00},
+             {d: Ricotta 30lb, unit: Case, cost: 78.00}, {d: Cream Cheese 30lb, unit: Case, cost: 84.00},
+             {d: Fresh Mozzarella, unit: Case, cost: 66.00}, {d: Large Eggs 15dz, unit: Case, cost: 38.00},
+             {d: Whole Milk Gallon, unit: Case, cost: 22.00}, {d: Oat Milk Case, unit: Case, cost: 34.00}]}
+  - {name: Midwest Beverage Co,    category: Beverages, terms: 14, cadence_days: [2], share: 0.14,
+     items: [{d: Draft Beer Keg Domestic, unit: Each, cost: 118.00}, {d: Draft Beer Keg Craft, unit: Each, cost: 162.00},
+             {d: House Red Wine Case, unit: Case, cost: 96.00}, {d: House White Wine Case, unit: Case, cost: 92.00},
+             {d: Tequila Blanco 1L, unit: Case, cost: 168.00}, {d: Bourbon 1L, unit: Case, cost: 192.00},
+             {d: Soda Syrup BIB, unit: Each, cost: 78.00}, {d: Iced Tea Bags, unit: Case, cost: 34.00},
+             {d: Coffee Beans 5lb, unit: Case, cost: 64.00}, {d: Lemonade Concentrate, unit: Case, cost: 46.00}]}
+  - {name: PackRight Supplies,     category: Packaging, terms: 14, cadence_days: [3], share: 0.07, every_n_weeks: 2,
+     items: [{d: To-Go Containers 9in, unit: Case, cost: 54.00}, {d: Paper Bags Large, unit: Bundle, cost: 36.00},
+             {d: Napkins, unit: Case, cost: 24.88}, {d: Cutlery Kits, unit: Case, cost: 42.00},
+             {d: Cold Cups 20oz, unit: Case, cost: 61.00}, {d: Lids 20oz, unit: Case, cost: 29.00}]}
+  - {name: Sparkle Janitorial,     category: Cleaning Supplies, terms: 30, cadence_days: [1], share: 0.04, every_n_weeks: 4,
+     items: [{d: Degreaser 5gal, unit: Each, cost: 48.00}, {d: Sanitizer Tablets, unit: Case, cost: 39.00},
+             {d: Trash Liners 55gal, unit: Case, cost: 44.00}, {d: Dish Machine Detergent, unit: Each, cost: 72.00}]}
+
+cogs_target_pct: 0.305                 # purchases are scaled so COGS ~ 30.5% of net sales
+
+fixed_bills:                            # recurring monthly bills (QBO recurring transactions)
+  - {dept: Occupancy, category: Rent, vendor: Westport Commons LLC, amount: 7800, day: 1, terms: 1}
+  - {dept: Occupancy, category: CAM / Common Area Maintenance, vendor: Westport Commons LLC, amount: 620, day: 1, terms: 1}
+  - {dept: Utilities, category: Electricity, vendor: Evergy, amount: 1450, day: 12, terms: 10, seasonal: {6: 1.35, 7: 1.45, 8: 1.40, 12: 1.10, 1: 1.15}}
+  - {dept: Utilities, category: Gas, vendor: Spire Energy, amount: 640, day: 14, terms: 10, seasonal: {12: 1.5, 1: 1.7, 2: 1.6, 7: 0.6, 8: 0.6}}
+  - {dept: Utilities, category: Water & Sewer, vendor: KC Water, amount: 310, day: 18, terms: 14}
+  - {dept: Utilities, category: Internet, vendor: Spectrum Business, amount: 139, day: 8, terms: 7}
+  - {dept: Utilities, category: Phone, vendor: Spectrum Business, amount: 89, day: 8, terms: 7}
+  - {dept: Software / POS, category: POS / Software Subscription, vendor: Toast Inc, amount: 215, day: 5, terms: 3}
+  - {dept: Software / POS, category: Accounting Software, vendor: Intuit QuickBooks, amount: 85, day: 5, terms: 3}
+  - {dept: Insurance, category: Business Insurance, vendor: Shield Commercial, amount: 520, day: 10, terms: 3}
+  - {dept: Equipment Lease, category: Equipment Lease, vendor: Hobart Leasing, amount: 390, day: 15, terms: 5}
+  - {dept: Operations, category: Music Subscription, vendor: SoundStream Business, amount: 39, day: 4, terms: 2}
+  - {dept: Operations, category: Linen Service, vendor: CleanLinen KC, amount: 460, day: 20, terms: 7}
+  - {dept: Pest Control, category: Pest Control, vendor: Guardian Pest, amount: 95, day: 22, terms: 7}
+  - {dept: Waste, category: Waste Disposal, vendor: WM Waste, amount: 240, day: 25, terms: 10}
+  - {dept: Marketing, category: Local Marketing, vendor: KC Local Ads, amount: 600, day: 6, terms: 7}
+  - {dept: Processing / Banking, category: Bank Charges, vendor: Commerce Bank, amount: 32, day: 28, terms: 0}
+
+misc_expenses:                          # irregular expenses (QBO Expense transactions)
+  - {dept: Repairs & Maintenance, category: Equipment Maintenance, vendor: KC Restaurant Repair, amount: [180, 1400], per_year: 11}
+  - {dept: Professional Fees, category: Accounting / Bookkeeping, vendor: Ledger Partners CPA, amount: [450, 450], per_year: 4}
+  - {dept: Licenses / Permits, category: Licenses & Permit Renewal, vendor: City of Kansas City, amount: [120, 850], per_year: 4}
+  - {dept: Marketing, category: Digital Advertising, vendor: Meta Platforms, amount: [150, 400], per_year: 12}
+  - {dept: Operations, category: Smallwares, vendor: WebstaurantStore, amount: [90, 520], per_year: 8}
+
+fees:
+  card_processing_pct: 0.0265
+  card_processing_fixed: 0.10
+  doordash_commission_pct: 0.25
+  doordash_marketing_pct: 0.02
+  card_settlement_lag_days: 1
+  doordash_payout_weekday: 1           # Tuesday weekly payout
+  merchant_processor: Toast Payments
+  bank: Commerce Bank
+
+sales_tax_remittance_day: 20            # monthly, for prior month, Missouri DOR

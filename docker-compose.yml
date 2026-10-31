@@ -1,0 +1,30 @@
+# ═══════════════════════════════════════════════════════════════════════
+# Praj.AI Onboarding Converter — standalone compose
+#
+# Run the converter microservice on its own:
+#   docker compose up -d --build
+#   curl http://localhost:8100/health
+#
+# To run it together with the PRAJ_IQ stack instead, use PRAJ_IQ's
+# docker-compose.converter.yml override (see that file).
+# ═══════════════════════════════════════════════════════════════════════
+
+services:
+  converter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: praj-converter
+    container_name: praj-converter
+    restart: unless-stopped
+    ports:
+      - "8100:8100"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CONVERTER_LOG_LEVEL=INFO
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8100/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

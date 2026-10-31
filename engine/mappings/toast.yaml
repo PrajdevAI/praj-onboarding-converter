@@ -1,0 +1,195 @@
+# Provider mapping pack: Toast POS nightly data export
+# Reference: https://doc.toasttab.com/doc/platformguide/adminDataExportFieldReference.html
+source_system: toast
+documents:
+
+  - document_type: item_selection
+    entity: sales_line
+    detect:
+      filename: "ItemSelectionDetails\\.csv$"
+      required_headers: ["Item Selection Id", "Menu Item", "Discnt", "Void?"]
+    columns:
+      order_id: "Order Id"
+      order_num: "Order #"
+      check_id: "Check Id"
+      line_id: "Item Selection Id"
+      sent_at: "Sent Date"
+      opened_at: "Order Date"
+      server: "Server"
+      dining_option: "Dining Option"
+      item_source_id: "Item Id"
+      sku: "SKU"
+      item_name: "Menu Item"
+      category: "Menu Group"
+      sales_category: "Sales Category"
+      gross: "Gross Price"
+      discount: "Discnt"
+      net: "Net Price"
+      quantity: "Qty"
+      tax: "Tax"
+      void: "Void?"
+    types:
+      sent_at: datetime_toast
+      opened_at: datetime_toast
+      gross: money
+      discount: money
+      net: money
+      tax: money
+      quantity: number
+      void: bool
+    rules:
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: modifier_selection
+    entity: sales_line_modifier
+    detect:
+      filename: "ModifiersSelectionDetails\\.csv$"
+      required_headers: ["Item Selection Id", "Modifier", "Option Group Name", "Parent Menu Selection"]
+    columns:
+      order_id: "Order Id"
+      check_id: "Check Id"
+      parent_line_id: "Item Selection Id"
+      modifier: "Modifier"
+      modifier_group: "Option Group Name"
+      parent_item_name: "Parent Menu Selection"
+      sales_category: "Sales Cateogry"      # Toast's own header typo
+      gross: "Gross Price"
+      discount: "Discnt"
+      net: "Net Price"
+      quantity: "Qty"
+      void: "Void?"
+      opened_at: "Order Date"
+    types: {gross: money, discount: money, net: money, quantity: number, void: bool, opened_at: datetime_toast}
+    rules:
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: order_details
+    entity: order_header
+    detect:
+      filename: "OrderDetails\\.csv$"
+      required_headers: ["Order Id", "Dining Options", "Order Source", "Gratuity"]
+    columns:
+      order_id: "Order Id"
+      order_num: "Order #"
+      opened_at: "Opened"
+      guests: "# of Guests"
+      server: "Server"
+      revenue_center: "Revenue Center"
+      dining_option: "Dining Options"
+      discount_total: "Discount Amount"
+      net_sales: "Amount"
+      tax: "Tax"
+      tip: "Tip"
+      gratuity: "Gratuity"
+      total: "Total"
+      voided: "Voided"
+      paid_at: "Paid"
+      closed_at: "Closed"
+      order_source: "Order Source"
+    types: {opened_at: datetime_toast, paid_at: datetime_toast, closed_at: datetime_toast, guests: number,
+            discount_total: money, net_sales: money, tax: money, tip: money, gratuity: money, total: money, voided: bool}
+    rules:
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: check_details
+    entity: check_detail
+    detect:
+      filename: "CheckDetails\\.csv$"
+      required_headers: ["Check Id", "Reason of Discount", "Customer Id"]
+    columns:
+      check_id: "Check Id"
+      customer_id: "Customer Id"
+      discount_reason: "Reason of Discount"
+      tender: "Tender"
+      opened_date: "Opened Date"
+    types: {opened_date: date_us}
+
+  - document_type: payment_details
+    entity: payment
+    detect:
+      filename: "PaymentDetails\\.csv$"
+      required_headers: ["Payment Id", "Amount Tendered", "V/MC/D Fees"]
+    columns:
+      payment_id: "Payment Id"
+      order_id: "Order Id"
+      check_id: "Check Id"
+      paid_at: "Paid Date"
+      opened_at: "Order Date"
+      dining_option: "Dining Option"
+      amount: "Amount"
+      tip: "Tip"
+      gratuity: "Gratuity"
+      total: "Total"
+      refunded: "Refunded"
+      refund_at: "Refund Date"
+      refund_amount: "Refund Amount"
+      status: "Status"
+      tender_type: "Type"
+      card_type: "Card Type"
+      other_type: "Other Type"
+      fees: "V/MC/D Fees"
+    types: {paid_at: datetime_toast, opened_at: datetime_toast, refund_at: datetime_toast, amount: money, tip: money,
+            gratuity: money, total: money, refund_amount: money, fees: money}
+    rules:
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: time_entries
+    entity: time_entry
+    detect:
+      filename: "TimeEntries\\.csv$"
+      required_headers: ["Employee External Id", "Payable Hours", "Non Cash Tips"]
+    columns:
+      employee_id: "Employee External Id"
+      employee: "Employee"
+      job_title: "Job Title"
+      in_at: "In Date"
+      out_at: "Out Date"
+      payable_hours: "Payable Hours"
+      wage: "Wage"
+      cash_tips: "Cash Tips Declared"
+      non_cash_tips: "Non Cash Tips"
+    types: {in_at: datetime_toast, out_at: datetime_toast, payable_hours: number, wage: money, cash_tips: money, non_cash_tips: money}
+    rules:
+      - business_date: {from: in_at, closeout: "04:00"}
+
+  - document_type: guest_feedback
+    entity: feedback
+    detect:
+      filename: "^GuestFeedback_.*\\.csv$"
+      required_headers: ["Order Id", "Rating"]
+    columns: {order_id: "Order Id", rating: "Rating", business_date: "Business Date"}
+    types: {rating: number, business_date: date_us}
+
+  - document_type: payouts
+    entity: settlement_card
+    detect:
+      filename: "Toast_Payouts.*\\.csv$"
+      required_headers: ["Payout Id", "Net Deposit", "Processing Fees"]
+    columns:
+      business_date: "Business Date"
+      payout_date: "Payout Date"
+      payout_id: "Payout Id"
+      card_sales: "Card Sales"
+      tips: "Tips"
+      gratuity: "Gratuity"
+      refunds: "Refunds"
+      fees: "Processing Fees"
+      net_deposit: "Net Deposit"
+    types: {business_date: date_us, payout_date: date_us, card_sales: money, tips: money, gratuity: money, refunds: money, fees: money, net_deposit: money}
+
+  - document_type: all_items_report
+    entity: product_mix
+    detect:
+      filename: "AllItemsReport\\.csv$"
+      required_headers: ["Master ID", "Item Qty (incl voids)", "Void Qty"]
+    columns: {item_source_id: "Item ID", item_name: "Menu Item", menu_group: "Menu Group", qty: "Item Qty", gross: "Gross Amount",
+              void_qty: "Void Qty", void_amount: "Void Amount", discount: "Discount Amount", net: "Net Amount"}
+    types: {qty: number, gross: money, void_qty: number, void_amount: money, discount: money, net: money}
+
+  - document_type: cash_entries
+    entity: cash_drawer_event
+    detect:
+      filename: "CashEntries\\.csv$"
+      required_headers: ["Entry Id", "Action", "Cash Drawer"]
+    columns: {entry_id: "Entry Id", created_at: "Created Date", action: "Action", amount: "Amount", drawer: "Cash Drawer", employee: "Employee"}
+    types: {created_at: datetime_toast, amount: money}

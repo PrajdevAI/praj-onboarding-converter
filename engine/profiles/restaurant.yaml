@@ -1,0 +1,79 @@
+# Business-type profile: full-service restaurant.
+# Switches the canonical -> Golden assembly rules; shared by every restaurant tenant.
+profile: restaurant
+golden_format_version: "1.0"            # Tony Pizza workbook layout
+
+business_day:
+  closeout: "04:00"                      # orders before this hour belong to the previous business date
+
+channels:                                # POS dining option -> Golden channel column
+  map:
+    "Dine In": Dine-In
+    "Take Out": Takeout
+    "Delivery": Delivery App
+    "Catering": Catering
+  golden_order: [Dine-In, Takeout, Delivery App, Catering]
+
+tenders:                                 # POS payment type -> Golden Payment Method
+  map:
+    "Cash": Cash Deposit
+    "Credit": Card Settlement
+    "Other": Platform Transfer
+  exclude_from_cash_in: ["Gift Card"]    # gift card redemptions are not new cash (deferred revenue)
+  settlement_lag_days: {"Cash Deposit": 0, "Card Settlement": 1}   # fallback when no payout file
+
+weather:                                 # NOAA daily -> Golden Weather label
+  snow_in: 1.0
+  rain_in: 0.25
+  hot_f: 92
+  cold_f: 28
+
+qbo_accounts:                            # accounting account -> Golden Department / Expense Category / Accounting Class
+  "Cost of Goods Sold:Food Purchases":        {dept: "Inventory / Supplies", category: "Raw Materials",    class: "Cost of Goods"}
+  "Cost of Goods Sold:Beverage Purchases":    {dept: "Inventory / Supplies", category: "Beverages",        class: "Cost of Goods"}
+  "Cost of Goods Sold:Packaging & Supplies":  {dept: "Inventory / Supplies", category: "Packaging",        class: "Cost of Goods"}
+  "Cost of Goods Sold:Cleaning Supplies":     {dept: "Inventory / Supplies", category: "Cleaning Supplies", class: "Cost of Goods"}
+  "Occupancy:Rent":                           {dept: "Occupancy",     category: "Rent",                          class: "Operating Expense"}
+  "Occupancy:CAM":                            {dept: "Occupancy",     category: "CAM / Common Area Maintenance",  class: "Operating Expense"}
+  "Utilities:Electricity":                    {dept: "Utilities",     category: "Electricity",                   class: "Operating Expense"}
+  "Utilities:Gas":                            {dept: "Utilities",     category: "Gas",                           class: "Operating Expense"}
+  "Utilities:Water & Sewer":                  {dept: "Utilities",     category: "Water & Sewer",                 class: "Operating Expense"}
+  "Utilities:Internet":                       {dept: "Utilities",     category: "Internet",                      class: "Operating Expense"}
+  "Utilities:Phone":                          {dept: "Utilities",     category: "Phone",                         class: "Operating Expense"}
+  "Software & Subscriptions:POS":             {dept: "Software / POS", category: "POS / Software Subscription",  class: "Operating Expense"}
+  "Software & Subscriptions:Accounting":      {dept: "Software / POS", category: "Accounting Software",          class: "Operating Expense"}
+  "Insurance:General Liability":              {dept: "Insurance",     category: "Business Insurance",            class: "Operating Expense"}
+  "Equipment Lease":                          {dept: "Equipment Lease", category: "Equipment Lease",             class: "Operating Expense"}
+  "Operations:Music":                         {dept: "Operations",    category: "Music Subscription",            class: "Operating Expense"}
+  "Operations:Linen":                         {dept: "Operations",    category: "Linen Service",                 class: "Operating Expense"}
+  "Operations:Pest Control":                  {dept: "Pest Control",  category: "Pest Control",                  class: "Operating Expense"}
+  "Operations:Waste":                         {dept: "Waste",         category: "Waste Disposal",                class: "Operating Expense"}
+  "Operations:Smallwares":                    {dept: "Operations",    category: "Smallwares",                    class: "Operating Expense"}
+  "Marketing:Local":                          {dept: "Marketing",     category: "Local Marketing",               class: "Operating Expense"}
+  "Marketing:Digital":                        {dept: "Marketing",     category: "Digital Advertising",           class: "Operating Expense"}
+  "Bank Charges":                             {dept: "Processing / Banking", category: "Bank Charges",           class: "Operating Expense"}
+  "Repairs & Maintenance":                    {dept: "Repairs & Maintenance", category: "Equipment Maintenance", class: "Operating Expense"}
+  "Professional Fees":                        {dept: "Professional Fees", category: "Accounting / Bookkeeping",  class: "Operating Expense"}
+  "Licenses & Permits":                       {dept: "Licenses / Permits", category: "Licenses & Permit Renewal", class: "Operating Expense"}
+  "Sales Tax Payable":                        {dept: "Taxes",         category: "Sales Tax Remittance",          class: "Liability Payment"}
+
+qbo_transaction_types:                   # which Transaction List rows become which Golden rows
+  recurring_bill: ["Bill"]               # recurring vendor bills (Bills_Fixed_Monthly)
+  bill_payment:   ["Bill Payment (Check)", "Bill Payment (Credit Card)"]
+  expense:        ["Expense", "Check", "Credit Card Expense"]
+  sales_tax:      ["Sales Tax Payment"]
+
+cash_out_sources:                        # Golden Cash_Out rows that do not come from the accounting file
+  payroll:        {dept: "Payroll", salary_category: "Salaries & Wages", hourly_category: "Hourly Labor", payee_prefix: "", method: "Payroll ACH", class: "Operating Expense"}
+  card_fees:      {dept: "Processing / Banking", category: "Merchant Processing Fees", payee: "Toast Payments", method: "Netted from Deposit", class: "Operating Expense"}
+  platform_fees:  {dept: "Delivery Platform Fees", category: "Delivery App Commission", payee: "DoorDash", method: "Netted from Payout", class: "Operating Expense"}
+  platform_adj:   {dept: "Delivery Platform Fees", category: "Delivery App Adjustments", payee: "DoorDash", method: "Netted from Payout", class: "Contra Revenue"}
+  refunds:        {dept: "Refunds / Chargebacks", category: "Customer Refunds", method: "Card / Cash", class: "Contra Revenue"}
+
+promotions:
+  # discount reasons that are scheduled promotions (shown in Daily_Sales.Promotion); other reasons are ad-hoc discounts
+  exclude_reasons: ["Loyalty Reward", "Manager Comp"]
+
+payroll:
+  salary_types: ["Salary"]
+  periods_per_year: 26

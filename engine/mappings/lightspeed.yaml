@@ -1,0 +1,127 @@
+# Provider mapping pack: Lightspeed Restaurant (K-Series) Back Office exports
+# Layout RECONSTRUCTED: Lightspeed publishes report names (Receipts, Sales, Payments) but not column lists.
+# Specifics handled here: day-first dates (dd/mm/yyyy hh:mm), modifiers separated by " | " with "(+x.xx)" upcharges,
+# voids flagged by a Status column, payment carried on the receipt row.
+source_system: lightspeed
+layout_status: reconstructed
+documents:
+
+  - document_type: receipts
+    entity: order_header
+    detect:
+      filename: "^Lightspeed_Receipts_.*\\.csv$"
+      required_headers: ["Receipt Number", "Receipt ID", "Covers", "Order Type", "Payment Method"]
+    columns:
+      order_id: "Receipt ID"
+      check_id: "Receipt ID"
+      order_num: "Receipt Number"
+      opened_at: "Opened"
+      closed_at: "Closed"
+      guests: "Covers"
+      server: "Staff"
+      dining_option: "Order Type"
+      customer_id: "Customer"
+      discount_reason: "Discount Name"
+      discount_total: "Discount"
+      net_sales: "Net"
+      tax: "Tax"
+      gratuity: "Gratuity"
+      tip: "Tip"
+      total: "Total"
+    value_maps:
+      dining_option: {"Eat In": "Dine In", "Takeaway": "Take Out", "Delivery": "Delivery", "Event": "Catering"}
+    constants:
+      voided: false
+    types: {opened_at: datetime_dmy, closed_at: datetime_dmy, guests: number, discount_total: money, net_sales: money, tax: money,
+            gratuity: money, tip: money, total: money}
+    rules:
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: receipt_payments
+    entity: payment
+    detect:
+      filename: "^Lightspeed_Receipts_.*\\.csv$"
+      required_headers: ["Receipt ID", "Payment Method", "Paid At", "Refunded"]
+    columns:
+      payment_id: "Receipt Number"
+      order_id: "Receipt ID"
+      check_id: "Receipt ID"
+      paid_at: "Paid At"
+      opened_at: "Opened"
+      dining_option: "Order Type"
+      tender_type: "Payment Method"
+      card_type: "Card Brand"
+      net_sales: "Net"
+      tax: "Tax"
+      tip: "Tip"
+      gratuity: "Gratuity"
+      total: "Total"
+      refund_amount: "Refunded"
+      refund_at: "Refund Date"
+    value_maps:
+      dining_option: {"Eat In": "Dine In", "Takeaway": "Take Out", "Delivery": "Delivery", "Event": "Catering"}
+      tender_type: {"Card": "Credit", "Cash": "Cash", "Voucher": "Gift Card", "DoorDash": "Other", "Uber Eats": "Other"}
+    constants:
+      status: "CAPTURED"
+      other_type: ""
+    types: {paid_at: datetime_dmy, opened_at: datetime_dmy, refund_at: datetime_dmy, net_sales: money, tax: money, tip: money,
+            gratuity: money, total: money, refund_amount: money}
+    rules:
+      - expression: {to: amount, expr: "net_sales + tax"}
+      - business_date: {from: opened_at, closeout: "04:00"}
+
+  - document_type: receipt_items
+    entity: sales_line
+    detect:
+      filename: "^Lightspeed_ReceiptItems_.*\\.csv$"
+      required_headers: ["Receipt ID", "Line ID", "Product", "Accounting Group", "Modifiers", "Status"]
+    columns:
+      order_id: "Receipt ID"
+      check_id: "Receipt ID"
+      line_id: "Line ID"
+      sent_at: "Time"
+      sku: "SKU"
+      item_name: "Product"
+      category: "Accounting Group"
+      quantity: "Quantity"
+      unit_price: "Unit Price"
+      modifiers_text: "Modifiers"
+      gross: "Gross"
+      discount: "Discount"
+      net: "Net"
+      tax: "Tax"
+      void: "Status"
+      dining_option: "Order Type"
+      server: "Staff"
+    value_maps:
+      void: {"Voided": "true", "Sold": "false"}
+      dining_option: {"Eat In": "Dine In", "Takeaway": "Take Out", "Delivery": "Delivery", "Event": "Catering"}
+    types: {sent_at: datetime_dmy, quantity: number, unit_price: money, gross: money, discount: money, net: money, tax: money, void: bool}
+    rules:
+      - copy: {from: sent_at, to: opened_at}
+      - business_date: {from: opened_at, closeout: "04:00"}
+      - split_modifiers: {from: modifiers_text, delimiter: " | ", price_pattern: "\\(\\+([0-9]+\\.[0-9]{2})\\)"}
+
+  - document_type: payouts
+    entity: settlement_card
+    detect:
+      filename: "^Lightspeed_Payments_Payouts_.*\\.csv$"
+      required_headers: ["Payout Reference", "Payout Date", "Payout Amount"]
+    columns:
+      business_date: "Sales Day"
+      payout_date: "Payout Date"
+      payout_id: "Payout Reference"
+      card_sales: "Card Volume"
+      tips: "Tips"
+      refunds: "Refunds"
+      fees: "Fees"
+      net_deposit: "Payout Amount"
+    types: {business_date: date_iso, payout_date: date_iso, card_sales: money, tips: money, refunds: money, fees: money, net_deposit: money}
+
+  - document_type: guest_feedback
+    entity: feedback
+    detect:
+      filename: "^Lightspeed_GuestFeedback_.*\\.csv$"
+      required_headers: ["Receipt ID", "Rating"]
+    columns: {order_id: "Receipt ID", rating: "Rating", business_date: "Business Date"}
+    types: {rating: number, business_date: date_iso}

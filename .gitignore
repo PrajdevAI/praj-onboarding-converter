@@ -1,0 +1,29 @@
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_ed25519*
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local data and generated outputs
+raw_uploads/
+*.log
+temp/
+tmp/
+outputs/
+
+# IDE and OS
+.vscode/
+.idea/
+.DS_Store
+
+output/

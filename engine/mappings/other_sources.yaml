@@ -1,0 +1,132 @@
+# Provider mapping packs for payroll, marketplace payouts, owner inputs and external enrichment
+source_system: mixed
+documents:
+
+  - source_system: gusto
+    document_type: payroll_journal
+    entity: payroll_line
+    detect:
+      filename: "Gusto_PayrollJournal.*\\.csv$"
+      required_headers: ["Payroll ID", "Check date", "Gross earnings", "Employer taxes", "Total employer cost"]
+    columns:
+      batch: "Payroll ID"
+      period_start: "Pay period start"
+      period_end: "Pay period end"
+      pay_date: "Check date"
+      employee_id: "Employee ID"
+      employee: "Employee"
+      role: "Job title"
+      pay_type: "Compensation type"
+      hourly_rate: "Hourly rate"
+      annual_salary: "Annual salary"
+      regular_hours: "Regular hours"
+      overtime_hours: "Overtime hours"
+      overtime_earnings: "Overtime earnings"
+      bonus: "Bonus"
+      tips: "Paycheck tips"
+      gross_earnings: "Gross earnings"
+      employer_tax: "Employer taxes"
+      employer_contributions: "Total employer contributions"
+      total_employer_cost: "Total employer cost"
+    types: {period_start: date_iso, period_end: date_iso, pay_date: date_iso, hourly_rate: money, annual_salary: money,
+            regular_hours: number, overtime_hours: number, overtime_earnings: money, bonus: money, tips: money,
+            gross_earnings: money, employer_tax: money, employer_contributions: money, total_employer_cost: money}
+
+  - source_system: gusto
+    document_type: employee_directory
+    entity: employee
+    detect:
+      filename: "Gusto_EmployeeDirectory.*\\.csv$"
+      required_headers: ["Employee ID", "Job title", "Compensation type"]
+    columns:
+      employee_id: "Employee ID"
+      first_name: "First name"
+      last_name: "Last name"
+      role: "Job title"
+      pay_type: "Compensation type"
+      hourly_rate: "Hourly rate"
+      annual_salary: "Annual salary"
+      benefits_per_period: "Benefits per pay period (employer)"
+    types: {hourly_rate: money, annual_salary: money, benefits_per_period: money}
+
+  - source_system: doordash
+    document_type: payouts
+    entity: settlement_platform
+    detect:
+      filename: "DoorDash_Payouts.*\\.csv$"
+      required_headers: ["Payout ID", "Net payout", "DoorDash commission and fees"]
+    columns:
+      payout_date: "Payout date"
+      payout_id: "Payout ID"
+      period_start: "Period start"
+      period_end: "Period end"
+      orders: "Orders"
+      subtotal: "Subtotal"
+      tax: "Tax (subtotal)"
+      sales: "Sales"
+      commission: "DoorDash commission and fees"
+      marketing: "Marketing spend"
+      amendments: "Amendments"
+      net_payout: "Net payout"
+    types: {payout_date: date_iso, period_start: date_iso, period_end: date_iso, orders: number, subtotal: money, tax: money,
+            sales: money, commission: money, marketing: money, amendments: money, net_payout: money}
+
+  - source_system: owner_input
+    document_type: menu_costs
+    entity: item_cost
+    detect:
+      filename: "menu_costs\\.csv$"
+      required_headers: ["SKU", "Unit COGS"]
+    columns: {sku: "SKU", item_name: "Menu Item", category: "Category", unit_cost: "Unit COGS"}
+    types: {unit_cost: money}
+
+  - source_system: owner_input
+    document_type: modifier_costs
+    entity: modifier_cost
+    detect:
+      filename: "modifier_costs\\.csv$"
+      required_headers: ["Modifier Group", "Modifier", "Unit COGS"]
+    columns: {modifier_group: "Modifier Group", modifier: "Modifier", unit_cost: "Unit COGS"}
+    types: {unit_cost: money}
+
+  - source_system: owner_input
+    document_type: events_calendar
+    entity: event
+    detect:
+      filename: "events_calendar\\.csv$"
+      required_headers: ["Date", "Event"]
+    columns: {event_date: "Date", event: "Event"}
+    types: {event_date: date_iso}
+
+  - source_system: noaa
+    document_type: ghcnd_daily
+    entity: weather
+    detect:
+      filename: "NOAA_GHCND.*\\.csv$"
+      required_headers: ["DATE", "PRCP", "TMAX"]
+    columns: {weather_date: "DATE", prcp: "PRCP", snow: "SNOW", tmax: "TMAX", tmin: "TMIN"}
+    types: {weather_date: date_iso, prcp: number, snow: number, tmax: number, tmin: number}
+
+  - source_system: quickbooks_online
+    document_type: vendors
+    entity: vendor
+    detect:
+      filename: "QBO_Vendors.*\\.xlsx$"
+      required_headers: ["Vendor", "Company"]
+    columns: {vendor: "Vendor", company: "Company", terms: "Terms"}
+
+  - source_system: quickbooks_online
+    document_type: chart_of_accounts
+    entity: account
+    detect:
+      filename: "QBO_ChartOfAccounts.*\\.xlsx$"
+      required_headers: ["Account", "Type"]
+    columns: {account: "Account", account_type: "Type"}
+
+  - source_system: owner_input
+    document_type: promotions
+    entity: promotion
+    detect:
+      filename: "promotions\\.csv$"
+      required_headers: ["Promotion"]
+    columns: {promotion: "Promotion"}

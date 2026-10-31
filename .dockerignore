@@ -1,0 +1,34 @@
+# Keep the build context small and the image clean.
+# The image only needs requirements.txt, engine/ and service/ (see Dockerfile).
+
+.venv/
+venv/
+**/__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.git/
+.gitignore
+
+# Big / generated data — never belongs in the image
+raw_uploads/
+output/
+
+# Not needed at runtime (data generation, tests, docs, sample spec)
+generators/
+spec/
+tests/
+docs/
+
+# Editor / OS cruft
+.vscode/
+.idea/
+.DS_Store
+*.md
+
+# Secrets
+.env
+.env.*
+*.pem
+*.key
+id_ed25519*
