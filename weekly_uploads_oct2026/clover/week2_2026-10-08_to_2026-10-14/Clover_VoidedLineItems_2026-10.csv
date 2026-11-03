@@ -1,0 +1,18 @@
+Line Item ID,Order ID,Item Name,Quantity,Price,Reason,Delete Type,Deleted Time,Approved By
+D00CB282C8B8F,568D0015EEBC1,Margherita Flatbread,1,16.0,Customer changed mind,VOID,2026-10-08 11:36:25,Daniel Okafor
+D115A25F83829,F1E261E955C27,Falafel Wrap,1,14.0,Customer changed mind,VOID,2026-10-08 16:22:25,Daniel Okafor
+67A163F8783EF,E2940D3EF8855,Fried Pickles,1,8.0,Customer changed mind,VOID,2026-10-09 12:16:48,Daniel Okafor
+96BD610C61FA0,ABD1EB30DA1E8,Classic Margarita,1,12.0,Customer changed mind,VOID,2026-10-09 20:21:27,Daniel Okafor
+36F2901C3B0F9,D87826D2CF043,Seasonal Vegetables,1,5.0,Customer changed mind,VOID,2026-10-09 21:14:18,Daniel Okafor
+087DB9420C8E1,544A946C72141,Vegetable Curry Bowl,1,18.0,Customer changed mind,VOID,2026-10-10 12:59:29,Daniel Okafor
+75E468E671A00,070B1B1DEBB7C,House Wine Glass,2,20.0,Customer changed mind,VOID,2026-10-10 17:50:38,Daniel Okafor
+E9228A73981A1,41A8F1A8678AF,Quinoa Kale Salad,1,13.0,Customer changed mind,VOID,2026-10-10 15:13:21,Daniel Okafor
+42DFA1E9CF477,B0B71C14F61EF,Chickpea Cobb Salad,1,14.0,Customer changed mind,VOID,2026-10-10 17:57:21,Daniel Okafor
+EDB9D0581E174,F8C65E010BE1C,French Fries,1,5.0,Customer changed mind,VOID,2026-10-10 19:24:46,Daniel Okafor
+3D156E6460486,B55C404A11BD3,Crispy Cauliflower Bites,1,11.0,Customer changed mind,VOID,2026-10-11 12:48:48,Daniel Okafor
+4AF2FB93E5077,907D520ADE85F,Harbor Beef Burger,1,17.0,Customer changed mind,VOID,2026-10-12 19:01:05,Daniel Okafor
+6C9B2903E7BD5,907D520ADE85F,House Wine Glass,1,10.0,Customer changed mind,VOID,2026-10-12 18:59:05,Daniel Okafor
+C4A092E690747,89532CD8899BA,Quinoa Kale Salad,1,13.0,Customer changed mind,VOID,2026-10-12 16:43:23,Daniel Okafor
+4B0BEFB8F1A01,31F54CD5D3CC9,Penne Arrabbiata,1,16.0,Customer changed mind,VOID,2026-10-12 12:35:24,Daniel Okafor
+47880CE767B55,95A82835F7BC4,Beyond Burger,1,18.0,Customer changed mind,VOID,2026-10-13 21:48:12,Daniel Okafor
+B498B9D58A299,D1F354153B9B9,Crispy Cauliflower Bites,1,11.0,Customer changed mind,VOID,2026-10-13 18:53:01,Daniel Okafor

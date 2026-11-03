@@ -1,0 +1,14 @@
+Line Item ID,Order ID,Item Name,Quantity,Price,Reason,Delete Type,Deleted Time,Approved By
+BF6166B981F01,527DC10118233,Mac and Cheese,1,7.0,Customer changed mind,VOID,2026-10-23 12:03:50,Daniel Okafor
+B0BFBACEB6C10,B3533C91B151A,Old Fashioned,1,13.0,Customer changed mind,VOID,2026-10-23 11:55:11,Daniel Okafor
+F78028B4BD797,FD9D327F97033,Chocolate Lava Cake,1,9.0,Customer changed mind,VOID,2026-10-23 11:48:40,Daniel Okafor
+28A8D967258FA,8539EFB615774,Hummus Platter,1,10.0,Customer changed mind,VOID,2026-10-24 13:37:21,Daniel Okafor
+677D8BBE1F4F2,970C4102836D5,Black Bean Burger,1,16.0,Customer changed mind,VOID,2026-10-24 19:28:40,Daniel Okafor
+21D43E3B70EC5,0D2892FDEF6EB,Chickpea Cobb Salad,1,14.0,Customer changed mind,VOID,2026-10-24 16:22:40,Daniel Okafor
+77FF54ECD8AE2,EB56AD7A75D5B,Crispy Cauliflower Bites,1,11.0,Customer changed mind,VOID,2026-10-25 16:23:48,Daniel Okafor
+FA91C208A2B40,2842F20FFC9C9,Soup of the Day,1,7.0,Customer changed mind,VOID,2026-10-25 13:05:03,Daniel Okafor
+8AD880291BD24,E197C6EBBAF1D,Harbor Beef Burger,1,17.0,Customer changed mind,VOID,2026-10-25 18:48:30,Daniel Okafor
+3ADF009BCDDE0,9A085898BDFDD,Sweet Potato Fries,1,6.0,Customer changed mind,VOID,2026-10-26 12:54:37,Daniel Okafor
+A5B21AAD2C971,719D31FD8FE7C,Black Bean Burger,1,16.0,Customer changed mind,VOID,2026-10-26 12:52:30,Daniel Okafor
+BA396F8BA1959,5B171D96619A8,Harbor Beef Burger,1,17.0,Customer changed mind,VOID,2026-10-26 21:44:20,Daniel Okafor
+F48DD069D60A8,C547641B68424,Spinach Artichoke Dip,1,11.0,Customer changed mind,VOID,2026-10-27 17:50:12,Daniel Okafor

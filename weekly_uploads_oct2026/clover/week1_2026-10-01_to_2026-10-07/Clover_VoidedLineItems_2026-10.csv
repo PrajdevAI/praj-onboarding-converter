@@ -1,0 +1,17 @@
+Line Item ID,Order ID,Item Name,Quantity,Price,Reason,Delete Type,Deleted Time,Approved By
+5192A11BDFD2F,A8B9D81BF0517,Spinach Ricotta Ravioli,1,18.0,Customer changed mind,VOID,2026-10-01 19:01:03,Daniel Okafor
+494D9995028FC,65B1F108260FC,Fountain Soda,1,3.0,Customer changed mind,VOID,2026-10-02 17:41:42,Daniel Okafor
+06CF64A6B1107,5D55342183786,Black Bean Burger,1,16.0,Customer changed mind,VOID,2026-10-02 16:59:58,Daniel Okafor
+DA35B9928B2F9,064FE24FA4BE5,Quinoa Kale Salad,1,13.0,Customer changed mind,VOID,2026-10-02 19:38:25,Daniel Okafor
+656AE5E2BEE7F,B2D8139DC8149,Iced Tea,1,3.0,Customer changed mind,VOID,2026-10-03 13:52:56,Daniel Okafor
+439DE61D75791,880C668FB5CCF,Fountain Soda,1,3.0,Customer changed mind,VOID,2026-10-03 20:48:29,Daniel Okafor
+81976E7C5A7BA,EB56AD7A75D5B,Eggplant Parmesan,1,20.0,Customer changed mind,VOID,2026-10-04 18:41:22,Daniel Okafor
+2E8D4EE38A0BA,7A7D37AAE5942,Fountain Soda,2,6.0,Customer changed mind,VOID,2026-10-04 19:13:10,Daniel Okafor
+FD93939C703E9,D3E8EED310828,Herb Roasted Chicken,1,21.0,Customer changed mind,VOID,2026-10-04 17:48:37,Daniel Okafor
+9DD31194D5B79,2390CDE58E1E9,Iced Tea,1,3.0,Customer changed mind,VOID,2026-10-04 17:31:39,Daniel Okafor
+D2A743C4CB8CB,212742C4AF229,Soup of the Day,1,7.0,Customer changed mind,VOID,2026-10-05 13:27:30,Daniel Okafor
+4CB4F47FB887F,352078897200D,House Wine Glass,1,10.0,Customer changed mind,VOID,2026-10-06 18:32:16,Daniel Okafor
+54E2EAB08BD2F,250C346ABE2FD,Beyond Burger,1,18.0,Customer changed mind,VOID,2026-10-06 16:16:50,Daniel Okafor
+DF6A829558C96,4685AD0DFA40D,Beyond Burger,1,18.0,Customer changed mind,VOID,2026-10-06 18:21:56,Daniel Okafor
+2D8ACCA6546BC,B64442EB913E1,Harbor Beef Burger,1,17.0,Customer changed mind,VOID,2026-10-06 14:06:29,Daniel Okafor
+514185A8FFC5B,58B7DC35C6142,Draft Beer,1,7.0,Customer changed mind,VOID,2026-10-07 20:59:24,Daniel Okafor

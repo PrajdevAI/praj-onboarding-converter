@@ -1,0 +1,45 @@
+Token,Item Name,Variation Name,SKU,Description,Categories,Reporting Category,Price,Item Type,Tax - Sales (8.25%)
+tok_hgapp001,Crispy Cauliflower Bites,Regular,HG-APP-001,,Appetizers,Appetizers,11.0,Prepared food and beverage,Y
+tok_hgapp002,Spinach Artichoke Dip,Regular,HG-APP-002,,Appetizers,Appetizers,11.0,Prepared food and beverage,Y
+tok_hgapp003,Loaded Veggie Nachos,Regular,HG-APP-003,,Appetizers,Appetizers,12.0,Prepared food and beverage,Y
+tok_hgapp004,Hummus Platter,Regular,HG-APP-004,,Appetizers,Appetizers,10.0,Prepared food and beverage,Y
+tok_hgapp005,Soup of the Day,Regular,HG-APP-005,,Appetizers,Appetizers,7.0,Prepared food and beverage,Y
+tok_hgapp006,Fried Pickles,Regular,HG-APP-006,,Appetizers,Appetizers,8.0,Prepared food and beverage,Y
+tok_hgsal001,Caesar Salad,Regular,HG-SAL-001,,Salads,Salads,12.0,Prepared food and beverage,Y
+tok_hgsal002,Chickpea Cobb Salad,Regular,HG-SAL-002,,Salads,Salads,14.0,Prepared food and beverage,Y
+tok_hgsal003,Garden Salad,Regular,HG-SAL-003,,Salads,Salads,9.0,Prepared food and beverage,Y
+tok_hgsal004,Quinoa Kale Salad,Regular,HG-SAL-004,,Salads,Salads,13.0,Prepared food and beverage,Y
+tok_hgbrg001,Black Bean Burger,Regular,HG-BRG-001,,Burgers & Sandwiches,Burgers & Sandwiches,16.0,Prepared food and beverage,Y
+tok_hgbrg002,Mushroom Swiss Veggie Burger,Regular,HG-BRG-002,,Burgers & Sandwiches,Burgers & Sandwiches,16.0,Prepared food and beverage,Y
+tok_hgbrg003,Beyond Burger,Regular,HG-BRG-003,,Burgers & Sandwiches,Burgers & Sandwiches,18.0,Prepared food and beverage,Y
+tok_hgbrg004,Falafel Wrap,Regular,HG-BRG-004,,Burgers & Sandwiches,Burgers & Sandwiches,14.0,Prepared food and beverage,Y
+tok_hgbrg005,Caprese Panini,Regular,HG-BRG-005,,Burgers & Sandwiches,Burgers & Sandwiches,14.0,Prepared food and beverage,Y
+tok_hgbrg006,Harbor Beef Burger,Regular,HG-BRG-006,,Burgers & Sandwiches,Burgers & Sandwiches,17.0,Prepared food and beverage,Y
+tok_hgent001,Eggplant Parmesan,Regular,HG-ENT-001,,Entrees,Entrees,20.0,Prepared food and beverage,Y
+tok_hgent002,Vegetable Curry Bowl,Regular,HG-ENT-002,,Entrees,Entrees,18.0,Prepared food and beverage,Y
+tok_hgent003,Mushroom Risotto,Regular,HG-ENT-003,,Entrees,Entrees,21.0,Prepared food and beverage,Y
+tok_hgent004,Tofu Stir Fry,Regular,HG-ENT-004,,Entrees,Entrees,17.0,Prepared food and beverage,Y
+tok_hgent005,Margherita Flatbread,Regular,HG-ENT-005,,Entrees,Entrees,16.0,Prepared food and beverage,Y
+tok_hgent006,Veggie Tacos,Regular,HG-ENT-006,,Entrees,Entrees,16.0,Prepared food and beverage,Y
+tok_hgent007,Grilled Salmon,Regular,HG-ENT-007,,Entrees,Entrees,26.0,Prepared food and beverage,Y
+tok_hgent008,Herb Roasted Chicken,Regular,HG-ENT-008,,Entrees,Entrees,21.0,Prepared food and beverage,Y
+tok_hgent009,Shrimp Tacos,Regular,HG-ENT-009,,Entrees,Entrees,18.0,Prepared food and beverage,Y
+tok_hgpas001,Fettuccine Alfredo,Regular,HG-PAS-001,,Pasta,Pasta,17.0,Prepared food and beverage,Y
+tok_hgpas002,Penne Arrabbiata,Regular,HG-PAS-002,,Pasta,Pasta,16.0,Prepared food and beverage,Y
+tok_hgpas003,Spinach Ricotta Ravioli,Regular,HG-PAS-003,,Pasta,Pasta,18.0,Prepared food and beverage,Y
+tok_hgsid001,French Fries,Regular,HG-SID-001,,Sides,Sides,5.0,Prepared food and beverage,Y
+tok_hgsid002,Sweet Potato Fries,Regular,HG-SID-002,,Sides,Sides,6.0,Prepared food and beverage,Y
+tok_hgsid003,Mac and Cheese,Regular,HG-SID-003,,Sides,Sides,7.0,Prepared food and beverage,Y
+tok_hgsid004,Garlic Mashed Potatoes,Regular,HG-SID-004,,Sides,Sides,5.0,Prepared food and beverage,Y
+tok_hgsid005,Seasonal Vegetables,Regular,HG-SID-005,,Sides,Sides,5.0,Prepared food and beverage,Y
+tok_hgdes001,New York Cheesecake,Regular,HG-DES-001,,Desserts,Desserts,9.0,Prepared food and beverage,Y
+tok_hgdes002,Chocolate Lava Cake,Regular,HG-DES-002,,Desserts,Desserts,9.0,Prepared food and beverage,Y
+tok_hgdes003,Key Lime Pie,Regular,HG-DES-003,,Desserts,Desserts,8.0,Prepared food and beverage,Y
+tok_hgbev001,Fountain Soda,Regular,HG-BEV-001,,Beverages,Beverages,3.0,Prepared food and beverage,Y
+tok_hgbev002,Iced Tea,Regular,HG-BEV-002,,Beverages,Beverages,3.0,Prepared food and beverage,Y
+tok_hgbev003,Fresh Lemonade,Regular,HG-BEV-003,,Beverages,Beverages,4.0,Prepared food and beverage,Y
+tok_hgbev004,Coffee,Regular,HG-BEV-004,,Beverages,Beverages,3.0,Prepared food and beverage,Y
+tok_hgbar001,Draft Beer,Regular,HG-BAR-001,,Bar,Bar,7.0,Prepared food and beverage,Y
+tok_hgbar002,House Wine Glass,Regular,HG-BAR-002,,Bar,Bar,10.0,Prepared food and beverage,Y
+tok_hgbar003,Classic Margarita,Regular,HG-BAR-003,,Bar,Bar,12.0,Prepared food and beverage,Y
+tok_hgbar004,Old Fashioned,Regular,HG-BAR-004,,Bar,Bar,13.0,Prepared food and beverage,Y

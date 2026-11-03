@@ -1,0 +1,3 @@
+Location,Entry Id,Created Date,Action,Amount,Cash Drawer,Payout Reason,Comment,Employee,Employee 2,Payout Reason 
+Harbor Grill - Westport,ce-20261009-1,10/9/26 10:00 AM,CASH_IN,200.00,Drawer 1,,Opening float,Daniel Okafor,,
+Harbor Grill - Westport,ce-20261009-2,10/9/26 11:30 PM,CASH_OUT,821.88,Drawer 1,,Close drawer / deposit,Daniel Okafor,,

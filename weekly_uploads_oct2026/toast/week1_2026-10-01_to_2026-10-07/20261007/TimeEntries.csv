@@ -1,0 +1,4 @@
+Location,Location Code,Id,GUID,Employee Id,Employee GUID,Employee External Id,Employee,Job Id,Job GUID,Job Code,Job Title,In Date,Out Date,Total Hours,Unpaid Break Time,Paid Break Time,Payable Hours,Cash Tips Declared,Non Cash Tips,Total Gratuity,Total Tips,Tips Withheld,Wage,Regular Hours,Overtime Hours,Regular Pay,Overtime Pay,Total Pay
+Harbor Grill - Westport,1,7000130,te-7000130,4,emp-E004,E004,Marcus Lee,267,,LIN,Line Cook,10/7/26 11:14 AM,10/7/26 7:01 PM,7.8,0.5,0.0,7.3,0.00,0.00,0.00,0.00,0.00,18.00,7.3,0.0,131.40,0.00,131.40
+Harbor Grill - Westport,1,7000131,te-7000131,6,emp-E006,E006,Tomas Silva,558,,PRE,Prep Cook,10/7/26 9:13 AM,10/7/26 4:03 PM,6.85,0.5,0.0,6.35,0.00,0.00,0.00,0.00,0.00,16.00,6.35,0.0,101.60,0.00,101.60
+Harbor Grill - Westport,1,7000132,te-7000132,12,emp-E012,E012,Andre Johnson,201,,DIS,Dishwasher,10/7/26 11:42 AM,10/7/26 6:22 PM,6.68,0.5,0.0,6.18,0.00,0.00,0.00,0.00,0.00,15.00,6.18,0.0,92.70,0.00,92.70

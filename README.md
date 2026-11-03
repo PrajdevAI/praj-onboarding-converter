@@ -138,3 +138,28 @@ run_all.py                      end to end
    "sauce is selling, buy more tomatoes" prediction has its inputs.
 4. Lift `engine/` into the Lambda functions behind Step Functions; the engine is already free of file-system
    assumptions beyond an input folder.
+
+
+<!-- cd "C:\Documents\AIML\PRAJ AI\PRAJ Interface\Praj_onboarding_POC\praj_onboarding_poc_v2\praj_onboarding_poc"
+python -m uvicorn service.app:app --reload --port 8100
+
+Proper setup with a virtual environment (recommended)
+
+cd "C:\Documents\AIML\PRAJ AI\PRAJ Interface\Praj_onboarding_POC\praj_onboarding_poc_v2\praj_onboarding_poc"
+
+# 1) one-time: create a venv
+python -m venv .venv
+
+# 2) activate it
+.\.venv\Scripts\Activate.ps1
+
+# 3) one-time: install dependencies (engine + the microservice)
+pip install -r requirements.txt
+pip install -r service\requirements.txt
+
+# 4) run the converter microservice
+python -m uvicorn service.app:app --reload --port 8100
+
+Once it's running you'll see Uvicorn running on http://127.0.0.1:8100. Verify in a browser:
+- http://localhost:8100/docs — interactive Swagger UI
+- http://localhost:8100/health — should return {"status":"ok"} -->

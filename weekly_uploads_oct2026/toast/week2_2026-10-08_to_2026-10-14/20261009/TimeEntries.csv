@@ -1,0 +1,6 @@
+Location,Location Code,Id,GUID,Employee Id,Employee GUID,Employee External Id,Employee,Job Id,Job GUID,Job Code,Job Title,In Date,Out Date,Total Hours,Unpaid Break Time,Paid Break Time,Payable Hours,Cash Tips Declared,Non Cash Tips,Total Gratuity,Total Tips,Tips Withheld,Wage,Regular Hours,Overtime Hours,Regular Pay,Overtime Pay,Total Pay
+Harbor Grill - Westport,1,7000088,te-7000088,4,emp-E004,E004,Marcus Lee,267,,LIN,Line Cook,10/9/26 11:50 AM,10/9/26 7:31 PM,7.69,0.5,0.0,7.19,0.00,0.00,0.00,0.00,0.00,18.00,7.19,0.0,129.42,0.00,129.42
+Harbor Grill - Westport,1,7000089,te-7000089,5,emp-E005,E005,Hannah Brooks,267,,LIN,Line Cook,10/9/26 10:10 AM,10/9/26 4:53 PM,6.72,0.5,0.0,6.22,0.00,0.00,0.00,0.00,0.00,17.50,6.22,0.0,108.85,0.00,108.85
+Harbor Grill - Westport,1,7000090,te-7000090,7,emp-E007,E007,Aisha Khan,318,,SER,Server,10/9/26 3:38 PM,10/9/26 9:55 PM,6.29,0.5,0.0,5.79,24.27,218.46,0.00,242.73,0.00,9.50,5.79,0.0,55.01,0.00,55.01
+Harbor Grill - Westport,1,7000091,te-7000091,8,emp-E008,E008,Kevin Walsh,318,,SER,Server,10/9/26 2:54 PM,10/9/26 10:06 PM,7.2,0.5,0.0,6.7,27.80,250.23,0.00,278.03,0.00,9.50,6.7,0.0,63.65,0.00,63.65
+Harbor Grill - Westport,1,7000092,te-7000092,11,emp-E011,E011,Emily Chen,724,,HOS,Host,10/9/26 2:54 PM,10/9/26 9:25 PM,6.53,0.5,0.0,6.03,0.00,0.00,0.00,0.00,0.00,14.00,6.03,0.0,84.42,0.00,84.42

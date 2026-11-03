@@ -1,0 +1,10 @@
+Location,Location Code,Id,GUID,Employee Id,Employee GUID,Employee External Id,Employee,Job Id,Job GUID,Job Code,Job Title,In Date,Out Date,Total Hours,Unpaid Break Time,Paid Break Time,Payable Hours,Cash Tips Declared,Non Cash Tips,Total Gratuity,Total Tips,Tips Withheld,Wage,Regular Hours,Overtime Hours,Regular Pay,Overtime Pay,Total Pay
+Harbor Grill - Westport,1,7000081,te-7000081,4,emp-E004,E004,Marcus Lee,267,,LIN,Line Cook,10/15/26 10:28 AM,10/15/26 7:06 PM,8.64,0.5,0.0,8.14,0.00,0.00,0.00,0.00,0.00,18.00,8.14,0.0,146.52,0.00,146.52
+Harbor Grill - Westport,1,7000082,te-7000082,5,emp-E005,E005,Hannah Brooks,267,,LIN,Line Cook,10/15/26 11:09 AM,10/15/26 5:42 PM,6.55,0.5,0.0,6.05,0.00,0.00,0.00,0.00,0.00,17.50,6.05,0.0,105.88,0.00,105.88
+Harbor Grill - Westport,1,7000083,te-7000083,6,emp-E006,E006,Tomas Silva,558,,PRE,Prep Cook,10/15/26 10:36 AM,10/15/26 5:23 PM,6.8,0.5,0.0,6.3,0.00,0.00,0.00,0.00,0.00,16.00,6.3,0.0,100.80,0.00,100.80
+Harbor Grill - Westport,1,7000084,te-7000084,7,emp-E007,E007,Aisha Khan,318,,SER,Server,10/15/26 1:42 PM,10/15/26 8:23 PM,6.68,0.5,0.0,6.18,13.02,117.15,0.00,130.17,0.00,9.50,6.18,0.0,58.71,0.00,58.71
+Harbor Grill - Westport,1,7000085,te-7000085,8,emp-E008,E008,Kevin Walsh,318,,SER,Server,10/15/26 2:29 PM,10/15/26 8:50 PM,6.36,0.5,0.0,5.86,12.38,111.43,0.00,123.81,0.00,9.50,5.86,0.0,55.67,0.00,55.67
+Harbor Grill - Westport,1,7000086,te-7000086,9,emp-E009,E009,Sofia Martinez,318,,SER,Server,10/15/26 1:05 PM,10/15/26 7:15 PM,6.17,0.5,0.0,5.67,12.01,108.12,0.00,120.13,0.00,9.50,5.67,0.0,53.87,0.00,53.87
+Harbor Grill - Westport,1,7000087,te-7000087,10,emp-E010,E010,Jordan Price,605,,BAR,Bartender,10/15/26 11:51 AM,10/15/26 6:04 PM,6.22,0.5,0.0,5.72,12.12,109.08,0.00,121.20,0.00,11.00,5.72,0.0,62.92,0.00,62.92
+Harbor Grill - Westport,1,7000088,te-7000088,11,emp-E011,E011,Emily Chen,724,,HOS,Host,10/15/26 10:28 AM,10/15/26 4:47 PM,6.32,0.5,0.0,5.82,0.00,0.00,0.00,0.00,0.00,14.00,5.82,0.0,81.48,0.00,81.48
+Harbor Grill - Westport,1,7000089,te-7000089,12,emp-E012,E012,Andre Johnson,201,,DIS,Dishwasher,10/15/26 9:26 AM,10/15/26 3:24 PM,5.97,0.0,0.0,5.97,0.00,0.00,0.00,0.00,0.00,15.00,5.97,0.0,89.55,0.00,89.55

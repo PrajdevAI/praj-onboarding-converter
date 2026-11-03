@@ -1,0 +1,504 @@
+{
+ "entityType": "Menu",
+ "name": "Main Menu",
+ "guid": "menu-main",
+ "groups": [
+  {
+   "entityType": "MenuGroup",
+   "name": "Appetizers",
+   "guid": "grp-Appetizers",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "Crispy Cauliflower Bites",
+     "guid": "item-HG-APP-001",
+     "sku": "HG-APP-001",
+     "plu": "",
+     "price": 11.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Spinach Artichoke Dip",
+     "guid": "item-HG-APP-002",
+     "sku": "HG-APP-002",
+     "plu": "",
+     "price": 11.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Loaded Veggie Nachos",
+     "guid": "item-HG-APP-003",
+     "sku": "HG-APP-003",
+     "plu": "",
+     "price": 12.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Hummus Platter",
+     "guid": "item-HG-APP-004",
+     "sku": "HG-APP-004",
+     "plu": "",
+     "price": 10.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Soup of the Day",
+     "guid": "item-HG-APP-005",
+     "sku": "HG-APP-005",
+     "plu": "",
+     "price": 7.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Fried Pickles",
+     "guid": "item-HG-APP-006",
+     "sku": "HG-APP-006",
+     "plu": "",
+     "price": 8.0,
+     "optionGroups": []
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Bar",
+   "guid": "grp-Bar",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "Draft Beer",
+     "guid": "item-HG-BAR-001",
+     "sku": "HG-BAR-001",
+     "plu": "",
+     "price": 7.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "House Wine Glass",
+     "guid": "item-HG-BAR-002",
+     "sku": "HG-BAR-002",
+     "plu": "",
+     "price": 10.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Classic Margarita",
+     "guid": "item-HG-BAR-003",
+     "sku": "HG-BAR-003",
+     "plu": "",
+     "price": 12.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Old Fashioned",
+     "guid": "item-HG-BAR-004",
+     "sku": "HG-BAR-004",
+     "plu": "",
+     "price": 13.0,
+     "optionGroups": []
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Beverages",
+   "guid": "grp-Beverages",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "Fountain Soda",
+     "guid": "item-HG-BEV-001",
+     "sku": "HG-BEV-001",
+     "plu": "",
+     "price": 3.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Iced Tea",
+     "guid": "item-HG-BEV-002",
+     "sku": "HG-BEV-002",
+     "plu": "",
+     "price": 3.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Fresh Lemonade",
+     "guid": "item-HG-BEV-003",
+     "sku": "HG-BEV-003",
+     "plu": "",
+     "price": 4.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Coffee",
+     "guid": "item-HG-BEV-004",
+     "sku": "HG-BEV-004",
+     "plu": "",
+     "price": 3.0,
+     "optionGroups": []
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Burgers & Sandwiches",
+   "guid": "grp-Burgers & Sandwiches",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "Black Bean Burger",
+     "guid": "item-HG-BRG-001",
+     "sku": "HG-BRG-001",
+     "plu": "",
+     "price": 16.0,
+     "optionGroups": [
+      "Side Choice",
+      "Add-Ons"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Mushroom Swiss Veggie Burger",
+     "guid": "item-HG-BRG-002",
+     "sku": "HG-BRG-002",
+     "plu": "",
+     "price": 16.0,
+     "optionGroups": [
+      "Side Choice",
+      "Add-Ons"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Beyond Burger",
+     "guid": "item-HG-BRG-003",
+     "sku": "HG-BRG-003",
+     "plu": "",
+     "price": 18.0,
+     "optionGroups": [
+      "Side Choice",
+      "Add-Ons"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Falafel Wrap",
+     "guid": "item-HG-BRG-004",
+     "sku": "HG-BRG-004",
+     "plu": "",
+     "price": 14.0,
+     "optionGroups": [
+      "Side Choice"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Caprese Panini",
+     "guid": "item-HG-BRG-005",
+     "sku": "HG-BRG-005",
+     "plu": "",
+     "price": 14.0,
+     "optionGroups": [
+      "Side Choice"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Harbor Beef Burger",
+     "guid": "item-HG-BRG-006",
+     "sku": "HG-BRG-006",
+     "plu": "",
+     "price": 17.0,
+     "optionGroups": [
+      "Temperature",
+      "Side Choice",
+      "Add-Ons"
+     ]
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Desserts",
+   "guid": "grp-Desserts",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "New York Cheesecake",
+     "guid": "item-HG-DES-001",
+     "sku": "HG-DES-001",
+     "plu": "",
+     "price": 9.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Chocolate Lava Cake",
+     "guid": "item-HG-DES-002",
+     "sku": "HG-DES-002",
+     "plu": "",
+     "price": 9.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Key Lime Pie",
+     "guid": "item-HG-DES-003",
+     "sku": "HG-DES-003",
+     "plu": "",
+     "price": 8.0,
+     "optionGroups": []
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Entrees",
+   "guid": "grp-Entrees",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "Eggplant Parmesan",
+     "guid": "item-HG-ENT-001",
+     "sku": "HG-ENT-001",
+     "plu": "",
+     "price": 20.0,
+     "optionGroups": [
+      "Side Choice"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Vegetable Curry Bowl",
+     "guid": "item-HG-ENT-002",
+     "sku": "HG-ENT-002",
+     "plu": "",
+     "price": 18.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Mushroom Risotto",
+     "guid": "item-HG-ENT-003",
+     "sku": "HG-ENT-003",
+     "plu": "",
+     "price": 21.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Tofu Stir Fry",
+     "guid": "item-HG-ENT-004",
+     "sku": "HG-ENT-004",
+     "plu": "",
+     "price": 17.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Margherita Flatbread",
+     "guid": "item-HG-ENT-005",
+     "sku": "HG-ENT-005",
+     "plu": "",
+     "price": 16.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Veggie Tacos",
+     "guid": "item-HG-ENT-006",
+     "sku": "HG-ENT-006",
+     "plu": "",
+     "price": 16.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Grilled Salmon",
+     "guid": "item-HG-ENT-007",
+     "sku": "HG-ENT-007",
+     "plu": "",
+     "price": 26.0,
+     "optionGroups": [
+      "Side Choice"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Herb Roasted Chicken",
+     "guid": "item-HG-ENT-008",
+     "sku": "HG-ENT-008",
+     "plu": "",
+     "price": 21.0,
+     "optionGroups": [
+      "Side Choice"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Shrimp Tacos",
+     "guid": "item-HG-ENT-009",
+     "sku": "HG-ENT-009",
+     "plu": "",
+     "price": 18.0,
+     "optionGroups": []
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Pasta",
+   "guid": "grp-Pasta",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "Fettuccine Alfredo",
+     "guid": "item-HG-PAS-001",
+     "sku": "HG-PAS-001",
+     "plu": "",
+     "price": 17.0,
+     "optionGroups": [
+      "Add Protein"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Penne Arrabbiata",
+     "guid": "item-HG-PAS-002",
+     "sku": "HG-PAS-002",
+     "plu": "",
+     "price": 16.0,
+     "optionGroups": [
+      "Add Protein"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Spinach Ricotta Ravioli",
+     "guid": "item-HG-PAS-003",
+     "sku": "HG-PAS-003",
+     "plu": "",
+     "price": 18.0,
+     "optionGroups": []
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Salads",
+   "guid": "grp-Salads",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "Caesar Salad",
+     "guid": "item-HG-SAL-001",
+     "sku": "HG-SAL-001",
+     "plu": "",
+     "price": 12.0,
+     "optionGroups": [
+      "Add Protein",
+      "Dressing"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Chickpea Cobb Salad",
+     "guid": "item-HG-SAL-002",
+     "sku": "HG-SAL-002",
+     "plu": "",
+     "price": 14.0,
+     "optionGroups": [
+      "Dressing"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Garden Salad",
+     "guid": "item-HG-SAL-003",
+     "sku": "HG-SAL-003",
+     "plu": "",
+     "price": 9.0,
+     "optionGroups": [
+      "Add Protein",
+      "Dressing"
+     ]
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Quinoa Kale Salad",
+     "guid": "item-HG-SAL-004",
+     "sku": "HG-SAL-004",
+     "plu": "",
+     "price": 13.0,
+     "optionGroups": [
+      "Add Protein",
+      "Dressing"
+     ]
+    }
+   ]
+  },
+  {
+   "entityType": "MenuGroup",
+   "name": "Sides",
+   "guid": "grp-Sides",
+   "items": [
+    {
+     "entityType": "MenuItem",
+     "name": "French Fries",
+     "guid": "item-HG-SID-001",
+     "sku": "HG-SID-001",
+     "plu": "",
+     "price": 5.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Sweet Potato Fries",
+     "guid": "item-HG-SID-002",
+     "sku": "HG-SID-002",
+     "plu": "",
+     "price": 6.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Mac and Cheese",
+     "guid": "item-HG-SID-003",
+     "sku": "HG-SID-003",
+     "plu": "",
+     "price": 7.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Garlic Mashed Potatoes",
+     "guid": "item-HG-SID-004",
+     "sku": "HG-SID-004",
+     "plu": "",
+     "price": 5.0,
+     "optionGroups": []
+    },
+    {
+     "entityType": "MenuItem",
+     "name": "Seasonal Vegetables",
+     "guid": "item-HG-SID-005",
+     "sku": "HG-SID-005",
+     "plu": "",
+     "price": 5.0,
+     "optionGroups": []
+    }
+   ]
+  }
+ ]
+}

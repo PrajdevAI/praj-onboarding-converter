@@ -1,0 +1,14 @@
+Line Item ID,Order ID,Item Name,Quantity,Price,Reason,Delete Type,Deleted Time,Approved By
+30F45D58FFE9C,DF82D3CF075D6,Iced Tea,1,3.0,Customer changed mind,VOID,2026-10-15 11:34:51,Daniel Okafor
+51310DB6EDF39,9D139AA2542FD,Falafel Wrap,1,14.0,Customer changed mind,VOID,2026-10-15 19:20:08,Daniel Okafor
+538302D58F5D5,D973C1BEE286D,Penne Arrabbiata,1,16.0,Customer changed mind,VOID,2026-10-16 19:03:21,Daniel Okafor
+F0B5590478F83,E481AE91741D3,Sweet Potato Fries,1,6.0,Customer changed mind,VOID,2026-10-16 18:26:36,Daniel Okafor
+39C2136EA6BC9,CE14D789333CE,French Fries,5,25.0,Customer changed mind,VOID,2026-10-17 10:40:00,Daniel Okafor
+1AFAA7EF71B01,DE09F52363D36,Tofu Stir Fry,1,17.0,Customer changed mind,VOID,2026-10-17 18:02:53,Daniel Okafor
+EE16E2750EBCF,C13932049E9C5,Caesar Salad,1,12.0,Customer changed mind,VOID,2026-10-17 21:17:30,Daniel Okafor
+C7821F2ACA9FA,3EBFA8DB8DCD0,Draft Beer,1,7.0,Customer changed mind,VOID,2026-10-17 16:46:06,Daniel Okafor
+93BD7F6F7B813,9B0004014D5FC,Mushroom Swiss Veggie Burger,1,16.0,Customer changed mind,VOID,2026-10-18 13:10:52,Daniel Okafor
+59AC5EDD74232,C7263E5F4DD60,Fountain Soda,1,3.0,Customer changed mind,VOID,2026-10-19 19:15:57,Daniel Okafor
+13A0B6D5844B7,D475D025C17B3,Black Bean Burger,1,16.0,Customer changed mind,VOID,2026-10-21 12:54:25,Daniel Okafor
+A13E97EB8EE3D,58EFE30FD1BE6,Vegetable Curry Bowl,1,18.0,Customer changed mind,VOID,2026-10-21 11:31:33,Daniel Okafor
+65769A17ED5BE,2B9862FE8B00A,French Fries,1,5.0,Customer changed mind,VOID,2026-10-21 12:47:22,Daniel Okafor

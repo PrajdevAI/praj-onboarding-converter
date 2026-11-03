@@ -1,0 +1,81 @@
+Master ID,Item ID,Parent ID,Menu Name,Menu Group,Subgroup,Menu Item,Avg Price,Item Qty (incl voids),% of Ttl Qty (incl voids),Gross Amount (incl voids),% of Ttl Amt (incl voids),Item Qty,Gross Amount,Void Qty,Void Amount,Discount Amount,Net Amount,# Orders
+200000,300000,,Main Menu,Appetizers,,Crispy Cauliflower Bites,11.0,18,3.04,198.0,2.85,18,198.0,0,0.0,1.1,196.9,14
+200000,300000,,Online Menu,Appetizers,,Crispy Cauliflower Bites,11.0,3,0.51,33.0,0.47,3,33.0,0,0.0,0.0,33.0,3
+200001,300001,,Main Menu,Appetizers,,Spinach Artichoke Dip,11.0,5,0.84,55.0,0.79,5,55.0,0,0.0,0.0,55.0,5
+200001,300001,,Online Menu,Appetizers,,Spinach Artichoke Dip,11.0,3,0.51,33.0,0.47,3,33.0,0,0.0,0.0,33.0,3
+200002,300002,,Main Menu,Appetizers,,Loaded Veggie Nachos,12.0,10,1.69,120.0,1.72,10,120.0,0,0.0,0.0,120.0,9
+200002,300002,,Online Menu,Appetizers,,Loaded Veggie Nachos,12.0,5,0.84,60.0,0.86,5,60.0,0,0.0,0.0,60.0,5
+200003,300003,,Main Menu,Appetizers,,Hummus Platter,10.0,7,1.18,70.0,1.01,7,70.0,0,0.0,0.0,70.0,7
+200003,300003,,Online Menu,Appetizers,,Hummus Platter,10.0,3,0.51,30.0,0.43,3,30.0,0,0.0,0.0,30.0,2
+200004,300004,,Main Menu,Appetizers,,Soup of the Day,7.0,8,1.35,56.0,0.8,8,56.0,0,0.0,0.0,56.0,5
+200005,300005,,Main Menu,Appetizers,,Fried Pickles,8.0,13,2.19,104.0,1.49,13,104.0,0,0.0,0.0,104.0,5
+200006,300006,,Main Menu,Salads,,Caesar Salad,12.0,11,1.85,132.0,1.9,10,120.0,1,12.0,0.0,132.0,11
+200006,300006,,Online Menu,Salads,,Caesar Salad,12.0,3,0.51,36.0,0.52,3,36.0,0,0.0,0.0,36.0,2
+200007,300007,,Main Menu,Salads,,Chickpea Cobb Salad,14.0,4,0.67,56.0,0.8,4,56.0,0,0.0,0.0,56.0,4
+200008,300008,,Main Menu,Salads,,Garden Salad,9.0,7,1.18,63.0,0.91,7,63.0,0,0.0,0.9,62.1,7
+200008,300008,,Online Menu,Salads,,Garden Salad,9.0,1,0.17,9.0,0.13,1,9.0,0,0.0,0.0,9.0,1
+200009,300009,,Main Menu,Salads,,Quinoa Kale Salad,13.0,5,0.84,65.0,0.93,5,65.0,0,0.0,0.0,65.0,4
+200010,300010,,Main Menu,Burgers & Sandwiches,,Black Bean Burger,16.0,27,4.55,432.0,6.21,27,432.0,0,0.0,0.0,432.0,13
+200010,300010,,Online Menu,Burgers & Sandwiches,,Black Bean Burger,16.0,8,1.35,128.0,1.84,8,128.0,0,0.0,0.0,128.0,8
+200011,300011,,Main Menu,Burgers & Sandwiches,,Mushroom Swiss Veggie Burger,16.0,18,3.04,288.0,4.14,18,288.0,0,0.0,0.0,288.0,10
+200011,300011,,Online Menu,Burgers & Sandwiches,,Mushroom Swiss Veggie Burger,16.0,3,0.51,48.0,0.69,3,48.0,0,0.0,0.0,48.0,3
+200012,300012,,Main Menu,Burgers & Sandwiches,,Beyond Burger,18.0,6,1.01,108.0,1.55,6,108.0,0,0.0,0.0,108.0,6
+200012,300012,,Online Menu,Burgers & Sandwiches,,Beyond Burger,18.0,2,0.34,36.0,0.52,2,36.0,0,0.0,0.0,36.0,2
+200013,300013,,Main Menu,Burgers & Sandwiches,,Falafel Wrap,14.0,16,2.7,224.0,3.22,16,224.0,0,0.0,1.4,222.6,16
+200013,300013,,Online Menu,Burgers & Sandwiches,,Falafel Wrap,14.0,3,0.51,42.0,0.6,3,42.0,0,0.0,0.0,42.0,3
+200014,300014,,Main Menu,Burgers & Sandwiches,,Caprese Panini,14.0,7,1.18,98.0,1.41,7,98.0,0,0.0,0.0,98.0,7
+200014,300014,,Online Menu,Burgers & Sandwiches,,Caprese Panini,14.0,2,0.34,28.0,0.4,2,28.0,0,0.0,0.0,28.0,2
+200015,300015,,Main Menu,Burgers & Sandwiches,,Harbor Beef Burger,17.0,7,1.18,119.0,1.71,7,119.0,0,0.0,0.0,119.0,6
+200016,300016,,Main Menu,Entrees,,Eggplant Parmesan,20.0,12,2.02,240.0,3.45,12,240.0,0,0.0,2.0,238.0,11
+200016,300016,,Online Menu,Entrees,,Eggplant Parmesan,20.0,2,0.34,40.0,0.57,2,40.0,0,0.0,0.0,40.0,2
+200017,300017,,Main Menu,Entrees,,Vegetable Curry Bowl,18.0,14,2.36,252.0,3.62,14,252.0,0,0.0,0.0,252.0,9
+200017,300017,,Online Menu,Entrees,,Vegetable Curry Bowl,18.0,5,0.84,90.0,1.29,5,90.0,0,0.0,0.0,90.0,5
+200018,300018,,Main Menu,Entrees,,Mushroom Risotto,21.0,21,3.54,441.0,6.34,21,441.0,0,0.0,0.0,441.0,9
+200018,300018,,Online Menu,Entrees,,Mushroom Risotto,21.0,1,0.17,21.0,0.3,1,21.0,0,0.0,0.0,21.0,1
+200019,300019,,Main Menu,Entrees,,Tofu Stir Fry,17.0,9,1.52,153.0,2.2,8,136.0,1,17.0,1.7,151.3,9
+200019,300019,,Online Menu,Entrees,,Tofu Stir Fry,17.0,2,0.34,34.0,0.49,2,34.0,0,0.0,0.0,34.0,2
+200020,300020,,Main Menu,Entrees,,Margherita Flatbread,16.0,14,2.36,224.0,3.22,14,224.0,0,0.0,0.0,224.0,9
+200020,300020,,Online Menu,Entrees,,Margherita Flatbread,16.0,1,0.17,16.0,0.23,1,16.0,0,0.0,0.0,16.0,1
+200021,300021,,Main Menu,Entrees,,Veggie Tacos,16.0,7,1.18,112.0,1.61,7,112.0,0,0.0,1.6,110.4,6
+200021,300021,,Online Menu,Entrees,,Veggie Tacos,16.0,2,0.34,32.0,0.46,2,32.0,0,0.0,0.0,32.0,2
+200022,300022,,Main Menu,Entrees,,Grilled Salmon,26.0,5,0.84,130.0,1.87,5,130.0,0,0.0,0.0,130.0,5
+200023,300023,,Main Menu,Entrees,,Herb Roasted Chicken,21.0,3,0.51,63.0,0.91,3,63.0,0,0.0,0.0,63.0,3
+200023,300023,,Online Menu,Entrees,,Herb Roasted Chicken,21.0,1,0.17,21.0,0.3,1,21.0,0,0.0,0.0,21.0,1
+200024,300024,,Main Menu,Entrees,,Shrimp Tacos,18.0,3,0.51,54.0,0.78,3,54.0,0,0.0,1.8,52.2,3
+200025,300025,,Main Menu,Pasta,,Fettuccine Alfredo,17.0,11,1.85,187.0,2.69,11,187.0,0,0.0,0.0,187.0,4
+200025,300025,,Online Menu,Pasta,,Fettuccine Alfredo,17.0,4,0.67,68.0,0.98,4,68.0,0,0.0,0.0,68.0,4
+200026,300026,,Main Menu,Pasta,,Penne Arrabbiata,16.0,12,2.02,192.0,2.76,12,192.0,0,0.0,0.0,192.0,8
+200026,300026,,Online Menu,Pasta,,Penne Arrabbiata,16.0,1,0.17,16.0,0.23,1,16.0,0,0.0,0.0,16.0,1
+200027,300027,,Main Menu,Pasta,,Spinach Ricotta Ravioli,18.0,12,2.02,216.0,3.1,12,216.0,0,0.0,0.0,216.0,5
+200027,300027,,Online Menu,Pasta,,Spinach Ricotta Ravioli,18.0,2,0.34,36.0,0.52,2,36.0,0,0.0,0.0,36.0,2
+200028,300028,,Main Menu,Sides,,French Fries,5.0,19,3.2,95.0,1.37,14,70.0,5,25.0,0.5,94.5,11
+200028,300028,,Online Menu,Sides,,French Fries,5.0,3,0.51,15.0,0.22,3,15.0,0,0.0,0.0,15.0,3
+200029,300029,,Main Menu,Sides,,Sweet Potato Fries,6.0,4,0.67,24.0,0.34,4,24.0,0,0.0,0.0,24.0,4
+200029,300029,,Online Menu,Sides,,Sweet Potato Fries,6.0,2,0.34,12.0,0.17,2,12.0,0,0.0,0.0,12.0,2
+200030,300030,,Main Menu,Sides,,Mac and Cheese,7.0,12,2.02,84.0,1.21,12,84.0,0,0.0,0.0,84.0,8
+200030,300030,,Online Menu,Sides,,Mac and Cheese,7.0,5,0.84,35.0,0.5,5,35.0,0,0.0,0.0,35.0,5
+200031,300031,,Main Menu,Sides,,Garlic Mashed Potatoes,5.0,1,0.17,5.0,0.07,1,5.0,0,0.0,0.0,5.0,1
+200031,300031,,Online Menu,Sides,,Garlic Mashed Potatoes,5.0,1,0.17,5.0,0.07,1,5.0,0,0.0,0.0,5.0,1
+200032,300032,,Main Menu,Sides,,Seasonal Vegetables,5.0,11,1.85,55.0,0.79,11,55.0,0,0.0,0.0,55.0,4
+200032,300032,,Online Menu,Sides,,Seasonal Vegetables,5.0,1,0.17,5.0,0.07,1,5.0,0,0.0,0.0,5.0,1
+200033,300033,,Main Menu,Desserts,,New York Cheesecake,9.0,10,1.69,90.0,1.29,10,90.0,0,0.0,0.0,90.0,6
+200033,300033,,Online Menu,Desserts,,New York Cheesecake,9.0,1,0.17,9.0,0.13,1,9.0,0,0.0,0.0,9.0,1
+200034,300034,,Main Menu,Desserts,,Chocolate Lava Cake,9.0,11,1.85,99.0,1.42,11,99.0,0,0.0,0.9,98.1,7
+200034,300034,,Online Menu,Desserts,,Chocolate Lava Cake,9.0,2,0.34,18.0,0.26,2,18.0,0,0.0,0.0,18.0,2
+200035,300035,,Main Menu,Desserts,,Key Lime Pie,8.0,3,0.51,24.0,0.34,3,24.0,0,0.0,0.0,24.0,3
+200036,300036,,Main Menu,Beverages,,Fountain Soda,3.0,31,5.23,93.0,1.34,31,93.0,0,0.0,0.3,92.7,23
+200036,300036,,Online Menu,Beverages,,Fountain Soda,3.0,5,0.84,15.0,0.22,5,15.0,0,0.0,0.0,15.0,3
+200037,300037,,Main Menu,Beverages,,Iced Tea,3.0,13,2.19,39.0,0.56,13,39.0,0,0.0,0.0,39.0,9
+200037,300037,,Online Menu,Beverages,,Iced Tea,3.0,3,0.51,9.0,0.13,3,9.0,0,0.0,0.0,9.0,2
+200038,300038,,Main Menu,Beverages,,Fresh Lemonade,4.0,6,1.01,24.0,0.34,6,24.0,0,0.0,0.0,24.0,4
+200038,300038,,Online Menu,Beverages,,Fresh Lemonade,4.0,1,0.17,4.0,0.06,1,4.0,0,0.0,0.0,4.0,1
+200039,300039,,Main Menu,Beverages,,Coffee,3.0,13,2.19,39.0,0.56,13,39.0,0,0.0,0.0,39.0,9
+200039,300039,,Online Menu,Beverages,,Coffee,3.0,1,0.17,3.0,0.04,1,3.0,0,0.0,0.0,3.0,1
+200040,300040,,Main Menu,Bar,,Draft Beer,7.0,20,3.37,140.0,2.01,19,133.0,1,7.0,0.7,139.3,10
+200040,300040,,Online Menu,Bar,,Draft Beer,7.0,2,0.34,14.0,0.2,2,14.0,0,0.0,0.0,14.0,2
+200041,300041,,Main Menu,Bar,,House Wine Glass,10.0,34,5.73,340.0,4.89,34,340.0,0,0.0,0.0,340.0,9
+200041,300041,,Online Menu,Bar,,House Wine Glass,10.0,2,0.34,20.0,0.29,2,20.0,0,0.0,0.0,20.0,2
+200042,300042,,Main Menu,Bar,,Classic Margarita,12.0,16,2.7,192.0,2.76,16,192.0,0,0.0,0.0,192.0,11
+200042,300042,,Online Menu,Bar,,Classic Margarita,12.0,1,0.17,12.0,0.17,1,12.0,0,0.0,0.0,12.0,1
+200043,300043,,Main Menu,Bar,,Old Fashioned,13.0,9,1.52,117.0,1.68,9,117.0,0,0.0,1.3,115.7,8
+200043,300043,,Online Menu,Bar,,Old Fashioned,13.0,1,0.17,13.0,0.19,1,13.0,0,0.0,0.0,13.0,1
